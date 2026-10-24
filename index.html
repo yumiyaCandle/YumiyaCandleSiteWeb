@@ -8,14 +8,25 @@
 <meta name="theme-color" content="#120709"/>
 <meta property="og:title" content="Yumiya Candle – Bougies gourmandes artisanales"/>
 <meta property="og:description" content="Des bougies qui ont l'air d'un dessert. Faites main en Suisse."/>
-<meta property="og:image" content="assets/candle-collection.jpg"/>
+<meta property="og:image" content="assets/photo-coeurs.jpg"/>
 <link rel="icon" href="assets/logo-light.png"/>
+<link rel="preload" as="image" href="assets/candle-cutout.webp"/>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
 <link href="https://fonts.googleapis.com/css2?family=Anton&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;1,9..144,400&display=swap" rel="stylesheet"/>
 <link rel="stylesheet" href="assets/style.css"/>
 </head>
 <body>
+
+<!-- ═══ ÉCRAN D'OUVERTURE ═══ -->
+<div class="loader" id="loader" aria-hidden="true">
+  <div class="loader-in">
+    <div class="loader-flame" data-flame-svg></div>
+    <img src="assets/logo-light.png" alt=""/>
+    <div class="loader-name">Yumiya Candle</div>
+    <div class="loader-bar"><span id="loader-bar"></span></div>
+  </div>
+</div>
 
 <!-- ═══ NAVIGATION ═══ -->
 <header class="nav" id="nav">
@@ -45,28 +56,46 @@
 
 <main id="top">
 
-  <!-- ═══ 1. HERO ═══ -->
+  <!-- ═══ 1. HERO : la vraie bougie, qui s'allume au scroll ═══ -->
   <section class="scene hero" data-scene="hero">
     <div class="scene-sticky">
-      <div class="hero-media" id="hero-media">
-        <img src="assets/candle-collection.jpg" alt="Bougies gourmandes Yumiya Candle, chantilly de cire et cœurs rouges"/>
-      </div>
-      <div class="hero-title" id="hero-title">
-        <div class="kicker">Artisanal · Végétal · Fait en Suisse</div>
-        <h1 class="display">Bougies<br/><em class="serif-it">gourmandes.</em></h1>
-        <div class="hero-meta">
-          <p class="lead">Des bougies qui ont l'air d'un dessert — et qui sentent pareil. Et si la tienne n'existe pas encore, on la crée pour toi.</p>
-          <div class="hero-cta">
-            <a href="#produit" class="btn">Voir la bougie</a>
-            <a href="#sur-mesure" class="btn btn-ghost">Commande perso</a>
-          </div>
+      <div class="hero-bg"></div>
+      <div class="hero-warm" id="hero-warm"></div>
+      <div class="hero-grain"></div>
+      <div class="kicker hero-kicker">Artisanal · Végétal · Fait en Suisse</div>
+      <a href="#produit" class="hero-price" aria-label="Dès 8.90 CHF"><span>Dès<b>8.90</b>CHF</span></a>
+
+      <h1 class="hero-word display" id="hero-word" aria-label="Bougies gourmandes">Bougies</h1>
+
+      <div class="hero-candle" id="hero-candle">
+        <div class="hero-candle-in">
+          <div class="hero-glow" id="hero-glow"></div>
+          <div class="hero-flame" id="hero-flame" data-flame-svg></div>
+          <img src="assets/candle-cutout.webp" alt="Bougie gourmande Yumiya : chantilly de cire, cœur rouge, couche fraise dans un verre"/>
+          <div class="hero-floor"></div>
         </div>
       </div>
-      <div class="hero-after" id="hero-after">
-        <h2 class="display">Coulée à la main.</h2>
-        <p>Une par une, couche par couche.</p>
+      <div class="hearts" id="hearts"></div>
+
+      <div class="hero-script serif-it" id="hero-script" aria-hidden="true"><span>gourmandes.</span></div>
+
+      <div class="hero-side l" id="side-l">
+        <span class="display">Coulée</span><span class="serif-it">à la main.</span>
+        <p>Une par une, couche par couche, dans notre atelier en Suisse romande.</p>
       </div>
-      <div class="scroll-hint">Scroll</div>
+      <div class="hero-side r" id="side-r">
+        <span class="display">Allume</span><span class="serif-it">le moment.</span>
+        <p>Rose, fraise, vanille chaude. Jusqu'à ~30 h de douceur.</p>
+      </div>
+
+      <div class="hero-bottom" id="hero-bottom">
+        <p class="lead">Des bougies qui ont l'air d'un dessert — et qui sentent pareil. Et si la tienne n'existe pas encore, on la crée pour toi.</p>
+        <div class="hero-cta">
+          <a href="#produit" class="btn">Voir la bougie</a>
+          <a href="#sur-mesure" class="btn btn-ghost">Commande perso</a>
+        </div>
+      </div>
+      <div class="scroll-hint" id="scroll-hint"></div>
     </div>
   </section>
 
@@ -85,50 +114,49 @@
   <!-- ═══ 3. COUCHE PAR COUCHE ═══ -->
   <section class="scene stack" id="couches" data-scene="stack">
     <div class="scene-sticky">
-      <div class="stack-glow" id="stack-glow"></div>
-      <div class="stack-head">
+      <div class="stack-head" id="stack-head">
         <div class="kicker">Anatomie d'une bougie</div>
-        <h2 class="display">Couche<br/>par couche.</h2>
+        <h2 class="display lines">Couche<br/>par couche.</h2>
         <p class="lead">Chaque étage est coulé, fouetté et décoré à la main. Voici ce qu'il y a dans ton verre.</p>
       </div>
       <div class="stage" id="stage">
-        <!-- calques générés par main.js -->
+        <img class="stage-photo" id="stage-photo" src="assets/candle-cutout.webp" alt="" loading="lazy"/>
+        <!-- calques dessinés par main.js -->
         <div class="labels" id="labels"></div>
       </div>
       <div class="stack-end" id="stack-end">
-        <h3 class="display">Allume le moment.</h3>
-        <p>~20 h de douceur pour la petite · ~30 h pour la grande</p>
+        <h3 class="display">6 couches.<br/>0 machine.</h3>
+        <p>Chaque bougie est unique — comme celle ou celui qui la reçoit.</p>
       </div>
       <div class="progress" id="progress"><span></span><span></span><span></span><span></span><span></span><span></span></div>
     </div>
   </section>
 
   <!-- ═══ 4. LE COFFRET ═══ -->
-  <section class="scene box-scene" id="coffret" data-scene="box">
+  <section class="scene box-scene" id="coffret" data-scene="box" data-nav="light">
     <div class="scene-sticky">
       <div class="box-copy">
         <div class="kicker">Prête à offrir</div>
-        <h2 class="display">Le<br/><em class="serif-it">coffret.</em></h2>
+        <h2 class="display lines">Le<br/><em class="serif-it">coffret.</em></h2>
         <p class="lead">Chaque bougie part emballée à la main, calée dans son papier de soie. Il ne reste qu'à l'offrir — ou à te la garder.</p>
-        <div class="box-steps" id="box-steps">
+        <div class="box-steps">
           <div class="box-step"><b>01</b><span>Coulée et décorée à la main dans notre atelier</span></div>
           <div class="box-step"><b>02</b><span>Emballée avec soin, papier de soie et ruban</span></div>
           <div class="box-step"><b>03</b><span>Livrée partout en Suisse</span></div>
         </div>
       </div>
       <div class="box-wrap">
-        <div class="box" id="box">
+        <div class="box">
           <div class="box-shadow"></div>
           <div class="box-back"></div>
           <div class="box-tissue" id="box-tissue"></div>
-          <div class="box-candle" id="box-candle"></div>
+          <div class="box-candle"><div id="box-candle-in"><img src="assets/candle-cutout.webp" alt="" loading="lazy"/></div></div>
           <div class="box-front">
             <img src="assets/logo-light.png" alt=""/>
             <small>Handmade in Switzerland</small>
           </div>
           <div class="box-lid" id="box-lid">
-            <div class="box-lid-top"><span>Yumiya Candle</span></div>
-            <div class="box-ribbon"></div>
+            <div class="box-lid-top"><div class="box-ribbon"></div><span>Yumiya Candle</span></div>
           </div>
         </div>
       </div>
@@ -136,11 +164,11 @@
   </section>
 
   <!-- ═══ 5. LA GAMME ═══ -->
-  <section class="lineup" id="gamme">
-    <div class="lineup-head rv">
-      <div class="kicker" style="color:var(--rose-2)">Nos collections</div>
-      <h2 class="display">La gamme.</h2>
-      <p>Des collections saisonnières en petites séries, et des créations uniques pour tes moments à toi.</p>
+  <section class="lineup" id="gamme" data-nav="light">
+    <div class="lineup-head">
+      <div class="kicker rv" style="color:var(--rose-2)">Nos collections</div>
+      <h2 class="display lines">La gamme.</h2>
+      <p class="rv">Des collections saisonnières en petites séries, et des créations uniques pour tes moments à toi.</p>
     </div>
     <div class="lineup-grid">
       <article class="card">
@@ -181,14 +209,23 @@
 
   <!-- ═══ 6. PRODUIT ═══ -->
   <section class="product" id="produit">
-    <div class="product-gallery">
-      <figure><img src="assets/candle-portrait.jpg" alt="Bougie Love sur un plateau en bois avec des roses" loading="lazy"/></figure>
-      <figure><img src="assets/candle-collection.jpg" alt="Bougie Love vue de près, cœurs rouges" loading="lazy" style="object-position:30% 50%"/></figure>
-      <figure><img src="assets/candle-real.jpg" alt="Bougie Love photographiée à l'atelier" loading="lazy"/></figure>
+    <div class="product-media">
+      <div class="product-sticky">
+        <div class="thumbs" id="thumbs">
+          <button class="on" data-src="assets/photo-coeurs.jpg" aria-label="Photo 1"><img src="assets/photo-coeurs.jpg" alt="" loading="lazy"/></button>
+          <button data-src="assets/candle-portrait.jpg" aria-label="Photo 2"><img src="assets/candle-portrait.jpg" alt="" loading="lazy"/></button>
+          <button data-src="assets/photo-bokeh.jpg" aria-label="Photo 3"><img src="assets/photo-bokeh.jpg" alt="" loading="lazy"/></button>
+          <button data-src="assets/photo-roses.jpg" aria-label="Photo 4"><img src="assets/photo-roses.jpg" alt="" loading="lazy"/></button>
+          <button data-src="assets/candle-real.jpg" aria-label="Photo 5"><img src="assets/candle-real.jpg" alt="" loading="lazy"/></button>
+        </div>
+        <div class="main-photo" id="main-photo">
+          <img src="assets/photo-coeurs.jpg" alt="Bougie gourmande Love entourée de cœurs rouges" loading="lazy"/>
+        </div>
+      </div>
     </div>
     <div class="product-info">
       <div class="kicker rv">Collection St-Valentin</div>
-      <h2 class="display rv">Bougie<br/>gourmande <em class="serif-it">Love.</em></h2>
+      <h2 class="display lines">Bougie<br/>gourmande<br/><em class="serif-it">Love.</em></h2>
       <p class="lead rv">Rose, fraise et vanille chaude. Une base de cire de soja, une couche fraise, une chantilly de cire fouettée et son petit cœur. Un parfum enveloppant pour l'amour.</p>
       <div class="notes rv"><span>Rose</span><span>Fraise</span><span>Vanille chaude</span></div>
       <div class="specs rv">
@@ -197,7 +234,7 @@
         <div><small>Contenant</small><span>Verre transparent</span></div>
         <div><small>Fabrication</small><span>À la main, en Suisse</span></div>
       </div>
-      <div class="sizes rv" id="sizes">
+      <div class="sizes rv">
         <button class="size on" data-size="petite"><em data-price="petite"></em><b>Petite</b><small>90 g · ~20 h</small></button>
         <button class="size" data-size="grande"><em data-price="grande"></em><b>Grande</b><small>180 g · ~30 h</small></button>
       </div>
@@ -221,7 +258,7 @@
     <div class="custom-inner">
       <div>
         <div class="kicker rv">Sur mesure</div>
-        <h2 class="display rv">Ta bougie,<br/><em class="serif-it">tes règles.</em></h2>
+        <h2 class="display lines">Ta bougie,<br/><em class="serif-it">tes règles.</em></h2>
         <p class="lead rv">Une senteur spéciale, des couleurs particulières, un message à graver, un événement unique ? On crée ta bougie exactement comme tu l'imagines.</p>
         <div class="occasions rv">
           <div class="occasion"><b>01</b><div><strong>Mariage &amp; fiançailles</strong><span>Bougie souvenir avec date, prénoms et parfum choisi</span></div></div>
@@ -261,18 +298,18 @@
   <!-- ═══ 9. AVIS ═══ -->
   <section class="reviews">
     <div class="reviews-head">
-      <h2 class="display rv">Elles <em class="serif-it">adorent.</em></h2>
+      <h2 class="display lines">Elles <em class="serif-it">adorent.</em></h2>
       <p class="lead rv">Ce que nos clientes disent de leurs bougies.</p>
     </div>
     <div class="reviews-track" id="reviews-track"></div>
   </section>
 
   <!-- ═══ 10. COMMANDER ═══ -->
-  <section class="order" id="commander">
+  <section class="order" id="commander" data-nav="light">
     <div class="order-inner">
       <div>
         <div class="kicker rv">On discute ?</div>
-        <h2 class="display rv">Passe une<br/><em class="serif-it">demande.</em></h2>
+        <h2 class="display lines">Passe une<br/><em class="serif-it">demande.</em></h2>
         <p class="lead rv">Aucun paiement en ligne. Tu envoies ta demande, on te confirme et on organise tout par message. Simple, humain, direct.</p>
         <div class="steps rv">
           <div class="step"><b>1</b><span>Envoie ta demande via le formulaire</span></div>
@@ -299,7 +336,7 @@
               <option value="Bougie personnalisée / sur mesure">Bougie personnalisée / sur mesure</option>
             </select>
           </div>
-          <div class="field" id="cf-size-wrap" hidden><label for="cf-size">Taille</label><select id="cf-size" name="Taille"></select></div>
+          <div class="field" id="cf-size-wrap" hidden><label for="cf-size">Taille</label><select id="cf-size" name="Taille" disabled></select></div>
           <div class="field"><label for="cf-address">Adresse de livraison *</label><input id="cf-address" name="Adresse de livraison" placeholder="Rue, NPA, ville — Suisse" required/></div>
           <div class="field"><label for="cf-message">Message</label><textarea id="cf-message" name="Message" placeholder="Question, demande spéciale, message cadeau…"></textarea></div>
           <button class="btn" type="submit">Envoyer ma demande</button>
@@ -312,6 +349,10 @@
 
 <!-- ═══ FOOTER ═══ -->
 <footer>
+  <div class="foot-cta">
+    <p class="rv">Suis l'atelier, les nouvelles collections et les coulisses sur Instagram.</p>
+    <a class="btn rv" href="https://www.instagram.com/yumiyacandle" target="_blank" rel="noopener">@yumiyacandle</a>
+  </div>
   <div class="foot-big display" aria-hidden="true">Yumiya Candle</div>
   <div class="foot-grid">
     <div>
