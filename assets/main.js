@@ -18,7 +18,7 @@ const IMG = 'assets/img/';
 const PRODUCTS = {
   marsh: {
     active: true, cat: 'gourmande', line: 'Bougie gourmande', name: 'Marshmallow Framboise', word: 'Framboise',
-    notes: 'Marshmallow · Framboise', badge: 'Signature', bg: '#F7D9D5', soft: '#FFF1EE',
+    notes: 'Marshmallow · Framboise', badge: 'Signature', mood: 'Douce & fruitée', spin: 'framboise', bg: '#F7D9D5', soft: '#FFF1EE',
     imgs: ['framboise-signature.webp', 'collection-gourmande.webp', 'bougie-framboise.webp', 'photo-coeurs.jpg'], cut: 'detoure-framboise.webp',
     desc: 'Une douceur sucrée et fruitée : notes de marshmallow et de framboise, chantilly blanche travaillée à la main et petits cœurs. Coulée dans un verre transparent, en cire de soja 100 % végétale.',
     sizes: [{ id: 'petite', label: 'Petite', meta: '90 g · ≈ 12 h', price: 8.90 }, { id: 'grande', label: 'Grande', meta: '180 g · ≈ 18 h', price: 10.90 }],
@@ -26,21 +26,21 @@ const PRODUCTS = {
   },
   lav: {
     active: true, cat: 'gourmande', line: 'Bougie gourmande', name: 'Lavande', word: 'Lavande',
-    notes: 'Lavande · Crème', bg: '#E4DAF1', soft: '#F6F1FB',
+    notes: 'Lavande · Crème', mood: 'Florale & apaisante', spin: 'lavande', bg: '#E4DAF1', soft: '#F6F1FB',
     imgs: ['bougie-lavande.webp'], cut: 'detoure-lavande.webp', price: 10.90,
     desc: 'La douceur apaisante de la lavande. Nuances de violet et de crème, chantilly blanche travaillée à la main, petits cœurs et tablette de chocolat violette.',
     facts: [['Senteur', 'Lavande'], ['Décor', 'Chantilly, cœurs et chocolat violet']],
   },
   aut: {
     active: true, cat: 'gourmande', line: 'Bougie gourmande', name: 'Automne', word: 'Automne',
-    notes: 'Pomme · Crème', badge: "Édition d'automne", bg: '#F5DCC0', soft: '#FDF1E4',
+    notes: 'Pomme · Crème', badge: "Édition d'automne", mood: 'Chaleureuse & gourmande', spin: 'automne', bg: '#F5DCC0', soft: '#FDF1E4',
     imgs: ['bougie-automne.webp'], cut: 'detoure-automne.webp', price: 10.90,
     desc: "L'atmosphère chaleureuse de l'automne, portée par de douces notes de pomme. Couches de cire orange et crème, chantilly et décorations gourmandes faites à la main.",
     facts: [['Senteur', 'Pomme'], ['Décor', 'Chantilly et décorations gourmandes']],
   },
   tulip: {
     active: true, cat: 'tulipe', line: 'Bougie florale', name: 'Tulipe', word: 'Tulipe',
-    notes: 'Vanille · Fraise', bg: '#DDEBD3', soft: '#F1F7EC',
+    notes: 'Vanille · Fraise', mood: 'Florale & délicate', spin: 'tulipe', bg: '#DDEBD3', soft: '#F1F7EC',
     imgs: ['bougie-tulipe.webp', 'tulipes-jardin.webp', 'tulipes-ecrins.webp', 'tulipes-boites.webp'], cut: 'detoure-tulipe.webp', price: 6.30,
     desc: "Un bouquet de tulipes en cire posé sur un socle vert mousse, dans son verre. Une note vanille-fraise, délicate et printanière, pour fleurir la maison toute l'année.",
     colors: [{ n: 'Rose', c: ['#E07C8C'] }, { n: 'Orange clair', c: ['#F0A877'] }, { n: 'Rouge & bleu clair', c: ['#C23B3B', '#86BFE0'] }, { n: 'Violet', c: ['#8B5BB5'] }],
@@ -48,12 +48,13 @@ const PRODUCTS = {
   },
   box: {
     active: true, cat: 'coffret', line: 'Coffret cadeau', name: 'Coffret Yumiya', word: 'Coffret',
-    notes: 'Gourmande + Tulipe', badge: 'Prêt à offrir', bg: '#F6E4D8', soft: '#FDF5EF',
+    notes: 'Gourmande + Tulipe', badge: 'Prêt à offrir', mood: 'Le duo prêt à offrir', bg: '#F6E4D8', soft: '#FDF5EF',
     imgs: ['coffret-yumiya.webp', 'coffret-ouvert.webp'], cut: 'detoure-coffret.webp', price: 13.30,
     desc: 'Un duo prêt à offrir : une bougie gourmande marshmallow-framboise et une bougie tulipe vanille-fraise, réunies dans une boîte cadeau aux tons pastel. Plus avantageux que les deux bougies achetées séparément.',
     facts: [['Contenu', '1 Marshmallow Framboise, 1 Tulipe'], ['Écrin', "Boîte cadeau nouée d'un ruban"]],
   },
 };
+const SPIN = { n: 24, cols: 6, rows: 4 }; // rendus 3D : 24 vues, planche 6 × 4
 const COMMON_FACTS = [['Cire', 'Soja 100 % végétale'], ['Mèche', 'Coton'], ['Fabrication', 'À la main, à La Neuveville'], ['Livraison', 'Suisse · 5.00 CHF']];
 
 /* ── Outils ── */
@@ -61,7 +62,7 @@ const $ = (s, el = document) => el.querySelector(s);
 const $$ = (s, el = document) => [...el.querySelectorAll(s)];
 const clamp = (v, a = 0, b = 1) => Math.min(b, Math.max(a, v));
 const ramp = (p, a, b) => clamp((p - a) / (b - a));
-const mix = (a, b, t) => a + (b - a) * t;
+const mix = (a, b, k) => a + (b - a) * k;
 const easeOut = t => 1 - Math.pow(1 - t, 3);
 const backOut = t => 1 + 2.4 * Math.pow(t - 1, 3) + 1.4 * Math.pow(t - 1, 2);
 const chf = n => (Math.round(n * 100) / 100).toFixed(2) + ' CHF';
@@ -90,6 +91,18 @@ function applyFinal(el, kf) {
     else e.style[k] = val;
   }));
 }
+
+/* ═══════════════════════════════════════════════
+   LANGUES (FR / DE / EN) — dictionnaire dans assets/i18n.js
+   ═══════════════════════════════════════════════ */
+translateDOM(document);
+$$('[data-lang]').forEach(b => {
+  b.classList.toggle('on', b.dataset.lang === LANG);
+  b.setAttribute('aria-pressed', b.dataset.lang === LANG);
+  b.addEventListener('click', () => setLang(b.dataset.lang));
+});
+const P = k => PRODUCTS[k];
+const tc = n => (LANG === 'fr' || n !== 'Rose' ? t(n) : t('Rose (coloris)')); // « Rose » : coloris ≠ senteur
 
 /* ═══════════════════════════════════════════════
    FLAMME & CŒUR
@@ -315,11 +328,11 @@ if (vitrine) {
   track.innerHTML = keys.map((k, i) => {
     const p = PRODUCTS[k];
     return `<article class="vt-panel" style="--bg:${p.bg};--soft:${p.soft}" data-i="${i}">
-      <span class="vt-word" aria-hidden="true">${esc(p.word)}</span>
-      <img class="vt-img${k === 'tulip' ? ' wide' : ''}" src="${IMG + p.cut}" alt="${esc(p.line + ' ' + p.name)}" loading="lazy"/>
+      <span class="vt-word" aria-hidden="true">${esc(t(p.word))}</span>
+      <img class="vt-img${k === 'tulip' ? ' wide' : ''}" src="${IMG + p.cut}" alt="${esc(t(p.line) + ' ' + t(p.name))}" loading="lazy"/>
       <div class="vt-info container">
-        <div><span class="vt-n">${String(i + 1).padStart(2, '0')} · ${esc(p.line)}</span><h3 class="vt-name">${esc(p.name)}</h3><p class="vt-notes">${esc(p.notes)}</p></div>
-        <div class="vt-buy"><span class="vt-price">${p.sizes ? 'dès ' : ''}${chf(minPrice(p))}</span><button class="btn btn-primary btn-sm" type="button" data-product="${k}">Découvrir</button></div>
+        <div><span class="vt-n">${String(i + 1).padStart(2, '0')} · ${esc(t(p.line))}</span><h3 class="vt-name">${esc(t(p.name))}</h3><p class="vt-notes">${esc(t(p.notes))}</p></div>
+        <div class="vt-buy"><span class="vt-price">${p.sizes ? t('dès') + ' ' : ''}${chf(minPrice(p))}</span><button class="btn btn-primary btn-sm" type="button" data-product="${k}">${t('Découvrir')}</button></div>
       </div>
     </article>`;
   }).join('');
@@ -385,17 +398,18 @@ if (giftImg && M && !reduced) M.scroll(p => { giftImg.style.transform = `scale($
 const grid = $('#shop-grid');
 grid.innerHTML = Object.entries(PRODUCTS).map(([k, p], i) => `
   <article class="p-card${p.active ? '' : ' sold'}" data-cat="${p.cat}" data-rv>
-    <button class="p-media" type="button" data-product="${k}" aria-label="Voir ${esc(p.name)}" style="--bg:${p.bg}">
-      <img class="p-photo" src="${IMG + p.imgs[0]}" alt="${esc(p.line + ' ' + p.name)}" loading="lazy"/>
+    <button class="p-media" type="button" data-product="${k}" data-cursor aria-label="${esc(t('Voir') + ' ' + t(p.name))}" style="--bg:${p.bg}">
+      <img class="p-photo" src="${IMG + p.imgs[0]}" alt="${esc(t(p.line) + ' ' + t(p.name))}" loading="lazy"/>
       <img class="p-cut" src="${IMG + p.cut}" alt="" loading="lazy"/>
       <span class="p-n">${String(i + 1).padStart(2, '0')}</span>
-      ${p.badge ? `<span class="badge badge-${p.cat === 'coffret' ? 'gold' : 'red'}">${esc(p.badge)}</span>` : ''}
-      ${p.active ? '' : '<span class="badge badge-soft">Épuisé</span>'}
+      ${p.badge ? `<span class="badge badge-${p.cat === 'coffret' ? 'gold' : 'red'}">${esc(t(p.badge))}</span>` : ''}
+      ${p.spin ? '<span class="badge-3d">3D</span>' : ''}
+      ${p.active ? '' : `<span class="badge badge-soft">${t('Épuisé')}</span>`}
     </button>
     <div class="p-body">
-      <div><span class="p-notes">${esc(p.notes)}</span><h3>${esc(p.name)}</h3></div>
-      <div class="p-end"><span class="p-price">${p.sizes ? 'dès ' : ''}${chf(minPrice(p))}</span>
-        <button class="p-add" type="button" ${p.active ? '' : 'disabled'} data-${p.sizes || p.colors ? 'product' : 'add'}="${k}" aria-label="Ajouter ${esc(p.name)} au panier"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg></button>
+      <div><span class="p-notes">${esc(t(p.notes))}</span><h3>${esc(t(p.name))}</h3></div>
+      <div class="p-end"><span class="p-price">${p.sizes ? t('dès') + ' ' : ''}${chf(minPrice(p))}</span>
+        <button class="p-add" type="button" ${p.active ? '' : 'disabled'} data-${p.sizes || p.colors ? 'product' : 'add'}="${k}" aria-label="${esc(t('Ajouter au panier') + ' : ' + t(p.name))}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg></button>
       </div>
     </div>
   </article>`).join('');
@@ -406,10 +420,10 @@ function placeTabsPill(btn, animate = true) {
   if (M) M.animate(tabsPill, box, animate && !reduced ? SPRING : { duration: 0 });
   else Object.assign(tabsPill.style, { transform: `translateX(${box.x}px)`, width: box.width + 'px' });
 }
-tabs.forEach(t => t.addEventListener('click', async () => {
-  tabs.forEach(x => { x.classList.toggle('on', x === t); x.setAttribute('aria-selected', x === t); });
-  placeTabsPill(t);
-  const cat = t.dataset.cat;
+tabs.forEach(tab => tab.addEventListener('click', async () => {
+  tabs.forEach(x => { x.classList.toggle('on', x === tab); x.setAttribute('aria-selected', x === tab); });
+  placeTabsPill(tab);
+  const cat = tab.dataset.cat;
   const cards = $$('.p-card', grid);
   await anim(cards.filter(c => !c.hidden), { opacity: 0, y: 12 }, { duration: 0.18 }).finished;
   cards.forEach(c => { c.hidden = cat !== 'all' && c.dataset.cat !== cat; });
@@ -534,29 +548,33 @@ function setQvImage(src, alt) {
 function openProduct(k) {
   const p = PRODUCTS[k]; if (!p) return;
   Object.assign(QV, { key: k, qty: 1, opt: p.sizes ? p.sizes[0].id : p.colors ? null : null });
-  $('#qv-line').textContent = p.line;
-  $('#qv-title').textContent = p.name;
-  $('#qv-notes').textContent = p.notes;
-  $('#qv-desc').textContent = p.desc;
+  $('#qv-line').textContent = t(p.line);
+  $('#qv-title').textContent = t(p.name);
+  $('#qv-notes').textContent = t(p.notes);
+  $('#qv-desc').textContent = t(p.desc);
   $('#qv-main').innerHTML = '';
   $('#qv-main').style.setProperty('--bg', p.bg);
-  setQvImage(IMG + p.imgs[0], p.line + ' ' + p.name);
+  setQvImage(IMG + p.imgs[0], t(p.line) + ' ' + t(p.name));
+  $('#qv-eta').innerHTML = etaHtml();
+  qvSetMode('photo');
+  $('#qv-mode').hidden = !p.spin;
+  $('#qv-3d-note').textContent = k === 'tulip' ? t('Coloris présenté en 3D : Rose.') : t('Reproduction 3D — chaque bougie étant faite main, la vôtre sera unique.');
   const pics = [...p.imgs, p.cut];
-  $('#qv-thumbs').innerHTML = pics.length > 1 ? pics.map((src, i) => `<button type="button" class="${i ? '' : 'on'}${src === p.cut ? ' cut' : ''}" data-src="${IMG + src}" aria-label="Photo ${i + 1}" style="--bg:${p.bg}"><img src="${IMG + src}" alt="" loading="lazy"/></button>`).join('') : '';
+  $('#qv-thumbs').innerHTML = pics.length > 1 ? pics.map((src, i) => `<button type="button" class="${i ? '' : 'on'}${src === p.cut ? ' cut' : ''}" data-src="${IMG + src}" aria-label="${t('Photo')} ${i + 1}" style="--bg:${p.bg}"><img src="${IMG + src}" alt="" loading="lazy"/></button>`).join('') : '';
   let opts = '';
   if (p.sizes) {
-    opts = `<div class="opt-l">Format</div><div class="pricing" role="radiogroup" aria-label="Format">
+    opts = `<div class="opt-l">${t('Format')}</div><div class="pricing" role="radiogroup" aria-label="${t('Format')}">
       <span class="pricing-pill" id="pricing-pill" aria-hidden="true"></span>
       ${p.sizes.map((s, i) => `<button type="button" class="price-card${i ? '' : ' on'}" role="radio" aria-checked="${!i}" data-size="${s.id}">
-        <span class="pc-top"><b>${s.label}</b><em>${chf(s.price)}</em></span><span class="pc-meta">${s.meta}</span>
+        <span class="pc-top"><b>${t(s.label)}</b><em>${chf(s.price)}</em></span><span class="pc-meta">${s.meta}</span>
         <span class="pc-bar"><i style="--w:${i ? 100 : 66}%"></i></span></button>`).join('')}
     </div>`;
   } else if (p.colors) {
-    opts = `<div class="opt-l">Coloris <span id="qv-color">— à choisir</span></div><div class="swatches">${p.colors.map(c => `<button type="button" class="swatch" data-color="${esc(c.n)}" aria-pressed="false"><i style="background:${c.c.length > 1 ? `linear-gradient(90deg,${c.c[0]} 50%,${c.c[1]} 50%)` : c.c[0]}"></i>${esc(c.n)}</button>`).join('')}</div>`;
+    opts = `<div class="opt-l">${t('Coloris')} <span id="qv-color">— ${t('à choisir')}</span></div><div class="swatches">${p.colors.map(c => `<button type="button" class="swatch" data-color="${esc(c.n)}" aria-pressed="false"><i style="background:${c.c.length > 1 ? `linear-gradient(90deg,${c.c[0]} 50%,${c.c[1]} 50%)` : c.c[0]}"></i>${esc(tc(c.n))}</button>`).join('')}</div>`;
   }
   $('#qv-opts').innerHTML = opts;
-  $('#qv-facts').innerHTML = [...p.facts, ...COMMON_FACTS].map(([a, b]) => `<div><dt>${esc(a)}</dt><dd>${esc(b)}</dd></div>`).join('');
-  const add = $('#qv-add'); add.disabled = !p.active; $('span', add).textContent = p.active ? 'Ajouter au panier' : 'Épuisé';
+  $('#qv-facts').innerHTML = [...p.facts, ...COMMON_FACTS].map(([a, b]) => `<div><dt>${esc(t(a))}</dt><dd>${esc(t(b))}</dd></div>`).join('');
+  const add = $('#qv-add'); add.disabled = !p.active; $('span', add).textContent = p.active ? t('Ajouter au panier') : t('Épuisé');
   qvUpdate();
   openLayerEl($('#modal-product'), 'modal');
   $('.qv-info').scrollTop = 0;
@@ -581,14 +599,15 @@ $('#modal-product').addEventListener('click', e => {
   if (sw) {
     QV.opt = sw.dataset.color;
     $$('.swatch').forEach(x => { x.classList.toggle('on', x === sw); x.setAttribute('aria-pressed', x === sw); });
-    $('#qv-color').textContent = QV.opt;
+    $('#qv-color').textContent = tc(QV.opt);
     $('.swatches').classList.remove('err');
   }
   const th = e.target.closest('.qv-thumbs button');
   if (th && !th.classList.contains('on')) {
     $$('.qv-thumbs button').forEach(x => x.classList.toggle('on', x === th));
     $('#qv-main').classList.toggle('cut', th.classList.contains('cut'));
-    setQvImage(th.dataset.src, PRODUCTS[QV.key].name);
+    qvSetMode('photo');
+    setQvImage(th.dataset.src, t(PRODUCTS[QV.key].name));
   }
 });
 $('#qty-minus').addEventListener('click', () => { QV.qty = Math.max(1, QV.qty - 1); qvUpdate(); });
@@ -596,7 +615,7 @@ $('#qty-plus').addEventListener('click', () => { QV.qty = Math.min(20, QV.qty + 
 $('#qv-add').addEventListener('click', e => {
   const p = PRODUCTS[QV.key];
   if (p.colors && !QV.opt) {
-    toast('Choisissez d\'abord un coloris');
+    toast(t('Choisissez d\'abord un coloris'));
     $('.swatches').classList.add('err');
     anim('.swatches', { x: [0, -8, 8, -5, 5, 0] }, { duration: 0.4 });
     return;
@@ -613,7 +632,7 @@ const saveCart = () => { try { localStorage.setItem('yumiya_cart_v2', JSON.strin
 const cartSub = () => cart.reduce((s, i) => s + i.price * i.qty, 0);
 const cartTotal = () => (cart.length ? cartSub() + SITE.shipping : 0);
 const cartQty = () => cart.reduce((s, i) => s + i.qty, 0);
-const optLabel = (k, opt) => { const p = PRODUCTS[k]; if (p.sizes) { const s = p.sizes.find(x => x.id === opt); return `${s.label} · ${s.meta}`; } return opt || ''; };
+const optLabel = (k, opt) => { const p = PRODUCTS[k]; if (p.sizes) { const s = p.sizes.find(x => x.id === opt); return `${t(s.label)} · ${s.meta}`; } return opt ? tc(opt) : ''; };
 let lastCount = -1;
 
 function renderCart() {
@@ -626,27 +645,28 @@ function renderCart() {
   }
   const body = $('#cart-body');
   if (!cart.length) {
-    body.innerHTML = `<div class="cart-empty"><img src="${IMG}logo.webp" alt=""/><p><strong>Votre panier est vide</strong><br/>Laissez-vous tenter par nos créations.</p><a class="btn btn-ghost btn-sm" href="#boutique" data-close>Voir la boutique</a></div>`;
+    body.innerHTML = `<div class="cart-empty"><img src="${IMG}logo.webp" alt=""/><p><strong>${t('Votre panier est vide')}</strong><br/>${t('Laissez-vous tenter par nos créations.')}</p><a class="btn btn-ghost btn-sm" href="#boutique" data-close>${t('Voir la boutique')}</a></div>`;
     $('#cart-ft').style.display = 'none';
   } else {
     body.innerHTML = cart.map((it, i) => `<div class="cart-item">
       <img src="${IMG + PRODUCTS[it.key].imgs[0]}" alt=""/>
-      <div><strong>${esc(PRODUCTS[it.key].name)}</strong><small>${esc(optLabel(it.key, it.opt) || PRODUCTS[it.key].line)}</small>
-        <div class="qty"><button type="button" data-dec="${i}" aria-label="Moins">−</button><span>${it.qty}</span><button type="button" data-inc="${i}" aria-label="Plus">+</button></div></div>
-      <div><div class="ci-price">${chf(it.price * it.qty)}</div><button type="button" class="cart-rm" data-rm="${i}">Retirer</button></div>
+      <div><strong>${esc(t(PRODUCTS[it.key].name))}</strong><small>${esc(optLabel(it.key, it.opt) || t(PRODUCTS[it.key].line))}</small>
+        <div class="qty"><button type="button" data-dec="${i}" aria-label="${t('Moins')}">−</button><span>${it.qty}</span><button type="button" data-inc="${i}" aria-label="${t('Plus')}">+</button></div></div>
+      <div><div class="ci-price">${chf(it.price * it.qty)}</div><button type="button" class="cart-rm" data-rm="${i}">${t('Retirer')}</button></div>
     </div>`).join('');
     $('#cart-ft').style.display = '';
   }
   $('#cart-sub').textContent = chf(cartSub());
   $('#cart-ship').textContent = chf(SITE.shipping);
   $('#cart-total').textContent = chf(cartTotal());
+  renderUpsell();
   saveCart();
 }
 $('#cart-body').addEventListener('click', e => {
-  const t = e.target.closest('button'); if (!t) return;
-  if (t.dataset.inc) cart[+t.dataset.inc].qty++;
-  if (t.dataset.dec) { const it = cart[+t.dataset.dec]; it.qty--; if (it.qty < 1) cart.splice(+t.dataset.dec, 1); }
-  if (t.dataset.rm) cart.splice(+t.dataset.rm, 1);
+  const btn = e.target.closest('button'); if (!btn) return;
+  if (btn.dataset.inc) cart[+btn.dataset.inc].qty++;
+  if (btn.dataset.dec) { const it = cart[+btn.dataset.dec]; it.qty--; if (it.qty < 1) cart.splice(+btn.dataset.dec, 1); }
+  if (btn.dataset.rm) cart.splice(+btn.dataset.rm, 1);
   renderCart();
 });
 renderCart();
@@ -669,23 +689,23 @@ async function addToCart(key, opt, qty, fromEl) {
   if (ex) ex.qty += qty; else cart.push({ key, opt, price, qty });
   await flyHeart(fromEl);
   renderCart();
-  toast(`Ajouté : ${p.name}${opt && !p.sizes ? ' · ' + opt : ''} ×${qty}`, true);
+  toast(`${t('Ajouté')} : ${t(p.name)}${opt && !p.sizes ? ' · ' + tc(opt) : ''} ×${qty}`, true);
 }
 $('#cart-open').addEventListener('click', () => openLayerEl($('#cart'), 'drawer'));
 
 let toastT;
 function toast(msg, withCart = false) {
-  const t = $('#toast');
-  t.innerHTML = `<span class="t-heart">♥</span><span>${esc(msg)}</span>${withCart ? '<button type="button" class="t-link">Voir le panier</button>' : ''}`;
-  const btn = $('.t-link', t); if (btn) btn.onclick = () => { hideToast(); openLayerEl($('#cart'), 'drawer'); };
-  anim(t, { transform: ['translate(-50%, 160%)', 'translate(-50%, 0%)'] }, SPRING);
-  if (!M || reduced) t.style.transform = 'translate(-50%, 0)';
+  const box = $('#toast');
+  box.innerHTML = `<span class="t-heart">♥</span><span>${esc(msg)}</span>${withCart ? `<button type="button" class="t-link">${t('Voir le panier')}</button>` : ''}`;
+  const btn = $('.t-link', box); if (btn) btn.onclick = () => { hideToast(); openLayerEl($('#cart'), 'drawer'); };
+  anim(box, { transform: ['translate(-50%, 160%)', 'translate(-50%, 0%)'] }, SPRING);
+  if (!M || reduced) box.style.transform = 'translate(-50%, 0)';
   clearTimeout(toastT); toastT = setTimeout(hideToast, 3200);
 }
 function hideToast() {
-  const t = $('#toast');
-  anim(t, { transform: 'translate(-50%, 160%)' }, { duration: 0.35, ease: EASE });
-  if (!M || reduced) t.style.transform = 'translate(-50%, 160%)';
+  const box = $('#toast');
+  anim(box, { transform: 'translate(-50%, 160%)' }, { duration: 0.35, ease: EASE });
+  if (!M || reduced) box.style.transform = 'translate(-50%, 160%)';
 }
 
 /* ═══════════════════════════════════════════════
@@ -703,7 +723,7 @@ function mailtoFor(subject, data) {
   return `mailto:${SITE.email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
 }
 function failBox(el, subject, data, msg) {
-  el.innerHTML = `<div class="warn"><b>Envoi automatique impossible</b><span>${msg}</span><a class="btn btn-primary btn-block" href="${mailtoFor(subject, data)}">Envoyer par email</a></div>`;
+  el.innerHTML = `<div class="warn"><b>${t('Envoi automatique impossible')}</b><span>${t(msg)}</span><a class="btn btn-primary btn-block" href="${mailtoFor(subject, data)}">${t('Envoyer par email')}</a></div>`;
   el.hidden = false;
 }
 function validate(form) {
@@ -743,10 +763,10 @@ function wire(form, success, makeSubject, type) {
     e.preventDefault();
     if ($('[name="_gotcha"]', form)?.checked) return;
     if (!validate(form)) return;
-    const data = { _subject: makeSubject(form), type, ...formData(form) };
+    const data = { _subject: makeSubject(form), type, langue: LANG.toUpperCase(), ...formData(form) };
     data._replyto = data.email;
     const btn = $('button[type=submit]', form), label = btn.textContent;
-    btn.disabled = true; btn.textContent = 'Envoi…';
+    btn.disabled = true; btn.textContent = t('Envoi…');
     const ok = await sendForm(data);
     btn.disabled = false; btn.textContent = label;
     form.hidden = true;
@@ -772,8 +792,8 @@ function coStep(n) {
   $('.co-main').scrollTop = 0;
 }
 function coSummary() {
-  $('#co-sum').innerHTML = cart.map(i => `<div class="sum-row"><img src="${IMG + PRODUCTS[i.key].imgs[0]}" alt=""/><span>${esc(PRODUCTS[i.key].name)}<small>${esc(optLabel(i.key, i.opt))} ×${i.qty}</small></span><b>${chf(i.price * i.qty)}</b></div>`).join('') +
-    `<div class="sum-line"><span>Livraison (Suisse)</span><span>${chf(SITE.shipping)}</span></div><div class="sum-line total"><span>Total</span><span>${chf(cartTotal())}</span></div>`;
+  $('#co-sum').innerHTML = cart.map(i => `<div class="sum-row"><img src="${IMG + PRODUCTS[i.key].imgs[0]}" alt=""/><span>${esc(t(PRODUCTS[i.key].name))}<small>${esc(optLabel(i.key, i.opt))} ×${i.qty}</small></span><b>${chf(i.price * i.qty)}</b></div>`).join('') +
+    `<div class="sum-line"><span>${t('Livraison (Suisse)')}</span><span>${chf(SITE.shipping)}</span></div><div class="sum-line total"><span>${t('Total')}</span><span>${chf(cartTotal())}</span></div>`;
 }
 $('#checkout-open').addEventListener('click', () => {
   if (!cart.length) return;
@@ -791,7 +811,7 @@ coForm.addEventListener('submit', e => {
   co.ref = 'YC-' + Date.now().toString(36).slice(-5).toUpperCase();
   const lines = cart.map(i => `${PRODUCTS[i.key].name}${i.opt ? ' (' + optLabel(i.key, i.opt) + ')' : ''} ×${i.qty} ${chf(i.price * i.qty)}`);
   lines.push('Livraison ' + chf(SITE.shipping));
-  co.order = { reference: co.ref, ...d, commande: lines.join(' | '), montant: chf(co.total), date: new Date().toLocaleString('fr-CH') };
+  co.order = { reference: co.ref, ...d, commande: lines.join(' | '), montant: chf(co.total), langue: LANG.toUpperCase(), date: new Date().toLocaleString('fr-CH') };
   const subj = `Nouvelle commande ${co.ref} — ${d.prenom} ${d.nom} — ${chf(co.total)}`;
   sendForm({ _subject: subj, _replyto: d.email, type: 'Commande', ...co.order }).then(ok => {
     if (!ok) failBox($('#co-warn'), subj, co.order, "Votre commande n'a pas pu nous être transmise automatiquement. Envoyez-nous le récapitulatif (déjà rédigé) en un clic, puis réglez votre commande ci-dessous.");
@@ -799,8 +819,8 @@ coForm.addEventListener('submit', e => {
   const amt = co.total.toFixed(2);
   $('#twint-link').href = `${SITE.twint}&amount=${amt}&trxInfo=${encodeURIComponent(co.ref)}`;
   $('#sumup-link').href = SITE.sumup;
-  $('#twint-cta').textContent = `Payer ${chf(co.total)} avec TWINT`;
-  $('#sumup-cta').textContent = `Payer ${chf(co.total)} par carte`;
+  $('#twint-cta').textContent = t('Payer {x} avec TWINT').replace('{x}', chf(co.total));
+  $('#sumup-cta').textContent = t('Payer {x} par carte').replace('{x}', chf(co.total));
   $('#sumup-amt').textContent = amt;
   $('#pay-amount').textContent = chf(co.total);
   $('#ord-ref').textContent = co.ref;
@@ -810,19 +830,219 @@ $$('[data-pay]').forEach(a => a.addEventListener('click', () => {
   co.method = a.dataset.pay;
   if (co.method !== 'TWINT') {
     const amt = co.total.toFixed(2);
-    if (navigator.clipboard && window.isSecureContext) navigator.clipboard.writeText(amt).then(() => toast('Montant copié : ' + chf(co.total))).catch(() => toast('Montant à régler : ' + chf(co.total)));
-    else toast('Montant à régler : ' + chf(co.total));
+    if (navigator.clipboard && window.isSecureContext) navigator.clipboard.writeText(amt).then(() => toast(t('Montant copié') + ' : ' + chf(co.total))).catch(() => toast(t('Montant à régler') + ' : ' + chf(co.total)));
+    else toast(t('Montant à régler') + ' : ' + chf(co.total));
   }
 }));
 $('#back-addr').addEventListener('click', () => coStep(1));
 $('#paid-btn').addEventListener('click', () => {
   if (co.order) sendForm({ _subject: `Paiement annoncé — ${co.ref} — ${chf(co.total)}`, type: 'Paiement annoncé', reference: co.ref, client: `${co.order.prenom} ${co.order.nom}`, email: co.order.email, montant: chf(co.total), moyen: co.method || 'non précisé', date: new Date().toLocaleString('fr-CH') });
   $('#done-ref').textContent = co.ref;
-  $('#co-sum').innerHTML = `<div class="sum-line"><span>Commande</span><span>${co.ref}</span></div><div class="sum-line total"><span>Total</span><span>${chf(co.total)}</span></div>`;
+  $('#co-sum').innerHTML = `<div class="sum-line"><span>${t('Commande')}</span><span>${co.ref}</span></div><div class="sum-line total"><span>${t('Total')}</span><span>${chf(co.total)}</span></div>`;
   cart = []; renderCart(); coForm.reset();
   coStep(3);
   anim('#co-done .success-ic', { scale: [0, 1], rotate: [-90, 0] }, { type: 'spring', stiffness: 260, damping: 12 });
 });
+
+
+/* ═══════════════════════════════════════════════
+   VISIONNEUSE 3D 360° (rendus 3D : planche de 24 vues)
+   ═══════════════════════════════════════════════ */
+function createSpin(el, { onFrame, auto = true } = {}) {
+  let frame = 0, pos = 0, vel = 0, dragging = false, lastX = 0, lastT = 0, autoOn = auto && !reduced, raf = 0, src = '', idle = 0;
+  el.classList.add('is-loading');
+  const draw = () => {
+    const f = ((Math.round(pos) % SPIN.n) + SPIN.n) % SPIN.n;
+    if (f === frame && el.dataset.drawn) return;
+    frame = f; el.dataset.drawn = '1';
+    el.style.backgroundPosition = `${(f % SPIN.cols) * (100 / (SPIN.cols - 1))}% ${Math.floor(f / SPIN.cols) * (100 / (SPIN.rows - 1))}%`;
+    onFrame && onFrame(f);
+  };
+  const tick = now => {
+    raf = requestAnimationFrame(tick);
+    if (!el.isConnected || el.offsetParent === null) return;
+    if (!dragging) {
+      if (Math.abs(vel) > 0.002) { pos += vel; vel *= 0.94; }
+      else if (autoOn && now - idle > 1800) pos += 0.06;
+    }
+    draw();
+  };
+  el.addEventListener('pointerdown', e => {
+    dragging = true; vel = 0; lastX = e.clientX; lastT = performance.now();
+    el.setPointerCapture(e.pointerId); el.classList.add('grabbing');
+  });
+  el.addEventListener('pointermove', e => {
+    if (!dragging) return;
+    const dx = e.clientX - lastX, now = performance.now();
+    const step = -dx / Math.max(8, el.clientWidth / 36);
+    pos += step; vel = step / Math.max(1, (now - lastT) / 16);
+    lastX = e.clientX; lastT = now;
+  });
+  const end = () => { if (!dragging) return; dragging = false; idle = performance.now(); el.classList.remove('grabbing'); };
+  el.addEventListener('pointerup', end); el.addEventListener('pointercancel', end);
+  el.tabIndex = 0;
+  el.setAttribute('role', 'img');
+  el.addEventListener('keydown', e => {
+    if (e.key === 'ArrowLeft') { pos -= 1; idle = performance.now(); e.preventDefault(); }
+    if (e.key === 'ArrowRight') { pos += 1; idle = performance.now(); e.preventDefault(); }
+  });
+  raf = requestAnimationFrame(tick);
+  return {
+    load(file, label) {
+      if (file === src) return;
+      src = file; el.classList.add('is-loading');
+      el.setAttribute('aria-label', label ? `${label} — ${t('vue 3D, utilisez les flèches pour tourner')}` : '');
+      const img = new Image();
+      img.onload = () => { if (src !== file) return; el.style.backgroundImage = `url("${img.src}")`; el.classList.remove('is-loading'); delete el.dataset.drawn; draw(); anim(el, { opacity: [0, 1], scale: [0.96, 1] }, { duration: 0.5, ease: EASE }); };
+      img.src = IMG + '360/' + file + '.webp';
+    },
+    spinTo(add) { vel = add; },
+  };
+}
+
+/* Studio 360° */
+const studioSpinEl = $('#studio-spin');
+if (studioSpinEl) {
+  const keys = Object.keys(PRODUCTS).filter(k => P(k).spin);
+  let curKey = keys[0];
+  const spin = createSpin(studioSpinEl, { onFrame: f => { $('#studio-deg').textContent = Math.round(f * 15); } });
+  $('#studio-picks').innerHTML = keys.map((k, i) => `<button type="button" role="tab" aria-selected="${!i}" class="${i ? '' : 'on'}" data-k="${k}" style="--bg:${P(k).bg}"><img src="${IMG + P(k).cut}" alt=""/><span>${esc(t(P(k).name))}</span></button>`).join('');
+  const show = k => {
+    curKey = k;
+    const p = P(k);
+    $$('#studio-picks button').forEach(b => { b.classList.toggle('on', b.dataset.k === k); b.setAttribute('aria-selected', b.dataset.k === k); });
+    $('.studio-stage').style.setProperty('--bg', p.bg);
+    $('.studio-stage').style.setProperty('--soft', p.soft);
+    $('#studio-name').textContent = t(p.name);
+    $('#studio-notes').textContent = t(p.notes) + ' · ' + t(p.mood);
+    $('#studio-price').textContent = (p.sizes ? t('dès') + ' ' : '') + chf(minPrice(p));
+    spin.load(p.spin, t(p.name));
+  };
+  $('#studio-picks').addEventListener('click', e => { const b = e.target.closest('button'); if (b && b.dataset.k !== curKey) { show(b.dataset.k); spin.spinTo(0.9); } });
+  $('#studio-cta').addEventListener('click', () => openProduct(curKey));
+  let started = false;
+  const start = () => { if (!started) { started = true; show(curKey); } };
+  if (M) M.inView('#studio', start, { margin: '400px 0px 400px 0px' }); else start();
+}
+
+/* 3D dans l'aperçu produit */
+let qvSpin = null;
+function qvSetMode(mode) {
+  const p = PRODUCTS[QV.key];
+  $$('#qv-mode button').forEach(b => b.classList.toggle('on', b.dataset.mode === mode));
+  const is3d = mode === '3d' && p.spin;
+  $('#qv-3d').hidden = !is3d;
+  $('#qv-main').hidden = !!is3d;
+  $('.modal-card.qv').style.setProperty('--bg', p.bg);
+  if (is3d) {
+    if (!qvSpin) qvSpin = createSpin($('#qv-spin'));
+    qvSpin.load(p.spin, t(p.name));
+  }
+}
+$('#qv-mode').addEventListener('click', e => { const b = e.target.closest('button'); if (b) qvSetMode(b.dataset.mode); });
+
+/* Livraison estimée : 5 à 10 jours ouvrables */
+function addBusinessDays(d, n) { const r = new Date(d); while (n > 0) { r.setDate(r.getDate() + 1); if (r.getDay() % 6) n--; } return r; }
+function etaHtml() {
+  const loc = { fr: 'fr-CH', de: 'de-CH', en: 'en-GB' }[LANG];
+  const f = d => d.toLocaleDateString(loc, { weekday: 'short', day: 'numeric', month: 'short' });
+  const now = new Date();
+  return `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 7h11v9H3zM14 10h4l3 3v3h-7z"/><circle cx="7" cy="17.5" r="1.6"/><circle cx="17" cy="17.5" r="1.6"/></svg><span>${t('Livraison estimée')} : <b>${f(addBusinessDays(now, 5))} – ${f(addBusinessDays(now, 10))}</b><small>${t('Partout en Suisse · 5.00 CHF')}</small></span>`;
+}
+
+/* ═══════════════════════════════════════════════
+   QUIZ : trouvez votre bougie
+   ═══════════════════════════════════════════════ */
+const QUIZ = [
+  { q: 'Pour qui est cette bougie ?', a: [['Pour moi', { marsh: 1, lav: 1, aut: 1, tulip: 1 }], ['Pour offrir', { box: 3, tulip: 1, marsh: 1 }], ['Pour un événement', { box: 1, tulip: 1, custom: 3 }]] },
+  { q: 'Quelle ambiance vous fait envie ?', a: [['Douceur gourmande', { marsh: 3, aut: 1 }], ['Bouquet floral', { tulip: 3, lav: 1 }], ['Cocon chaleureux', { aut: 3, marsh: 1 }], ['Calme & détente', { lav: 3, tulip: 1 }]] },
+  { q: "À quel moment l'allumerez-vous ?", a: [['Une soirée cosy', { aut: 2, marsh: 1 }], ['Un matin lumineux', { tulip: 2, marsh: 1 }], ['Un moment pour soi', { lav: 2, aut: 1 }], ['Pour décorer', { tulip: 2, box: 1 }]] },
+];
+let quizAns = [];
+const quizEl = $('#quiz');
+function quizRender() {
+  const step = quizAns.length;
+  let html;
+  if (step < QUIZ.length) {
+    const Q = QUIZ[step];
+    html = `<div class="quiz-prog">${QUIZ.map((_, i) => `<i class="${i < step ? 'done' : i === step ? 'cur' : ''}"></i>`).join('')}<span>${t('Question')} ${step + 1} / ${QUIZ.length}</span></div>
+      <h3 class="quiz-q">${t(Q.q)}</h3>
+      <div class="quiz-a">${Q.a.map((x, i) => `<button type="button" data-qa="${i}"><span>${t(x[0])}</span><i>→</i></button>`).join('')}</div>
+      ${step ? `<button type="button" class="back" data-qback>← ${t('Question précédente')}</button>` : ''}`;
+  } else {
+    const s = { marsh: 0, lav: 0, aut: 0, tulip: 0, box: 0, custom: 0 };
+    quizAns.forEach((ai, qi) => Object.entries(QUIZ[qi].a[ai][1]).forEach(([k, v]) => { s[k] += v; }));
+    const rank = Object.entries(s).filter(([k]) => k === 'custom' || P(k).active).sort((a, b) => b[1] - a[1]);
+    const top = rank[0][0];
+    if (top === 'custom') {
+      html = `<div class="quiz-res"><div class="quiz-res-img custom-r">✦</div><div class="quiz-res-txt"><span class="kicker">${t('Notre recommandation')}</span><h3>${t('Une création sur mesure')}</h3><p>${t("Pour un événement, rien ne vaut une bougie imaginée pour l'occasion : senteur, couleurs, décor et message à votre image.")}</p><div class="quiz-ctas"><a class="btn btn-primary" href="#sur-mesure">${t('Imaginer ma bougie')}</a><button type="button" class="back" data-qreset>${t('Recommencer')}</button></div></div></div>`;
+    } else {
+      const p = P(top), alt = rank.find(([k]) => k !== top && k !== 'custom');
+      html = `<div class="quiz-res"><div class="quiz-res-img" style="--bg:${p.bg}"><img src="${IMG + p.cut}" alt="${esc(t(p.name))}"/></div><div class="quiz-res-txt">
+        <span class="kicker">${t('Votre bougie idéale')}</span><h3>${esc(t(p.name))}</h3><p class="quiz-mood">${esc(t(p.mood))} · ${p.sizes ? t('dès') + ' ' : ''}${chf(minPrice(p))}</p>
+        <p>${esc(t(p.desc))}</p>
+        <div class="quiz-ctas"><button type="button" class="btn btn-primary" data-product="${top}">${t('Découvrir')}</button>${alt ? `<button type="button" class="quiz-alt" data-product="${alt[0]}"><img src="${IMG + P(alt[0]).imgs[0]}" alt=""/><span><small>${t('Vous aimerez aussi')}</small>${esc(t(P(alt[0]).name))}</span></button>` : ''}</div>
+        <button type="button" class="back" data-qreset>${t('Recommencer le quiz')}</button></div></div>`;
+    }
+  }
+  quizEl.innerHTML = html;
+  anim(quizEl.children, { opacity: [0, 1], y: [18, 0] }, { duration: 0.5, ease: EASE, delay: stagger(0.05) });
+}
+quizEl.addEventListener('click', e => {
+  const a = e.target.closest('[data-qa]'); if (a) { quizAns.push(+a.dataset.qa); quizRender(); return; }
+  if (e.target.closest('[data-qback]')) { quizAns.pop(); quizRender(); }
+  if (e.target.closest('[data-qreset]')) { quizAns = []; quizRender(); }
+});
+quizRender();
+
+/* ═══════════════════════════════════════════════
+   PANIER : suggestions
+   ═══════════════════════════════════════════════ */
+function renderUpsell() {
+  const box = document.getElementById('upsell'); if (!box) return;
+  const inCart = new Set(cart.map(i => i.key));
+  const sugg = Object.keys(PRODUCTS).filter(k => !inCart.has(k) && PRODUCTS[k].active).sort((a, b) => (b === 'box') - (a === 'box')).slice(0, 2);
+  if (!cart.length || !sugg.length) { box.innerHTML = ''; return; }
+  box.innerHTML = `<span class="kicker">${t('Complétez votre commande')}</span>` + sugg.map(k => {
+    const p = PRODUCTS[k];
+    return `<div class="up-item"><img src="${IMG + p.imgs[0]}" alt=""/><span><b>${esc(t(p.name))}</b><small>${p.sizes ? t('dès') + ' ' : ''}${chf(minPrice(p))}</small></span><button type="button" class="p-add" data-${p.sizes || p.colors ? 'product' : 'add'}="${k}" aria-label="${esc(t('Ajouter au panier') + ' : ' + t(p.name))}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg></button></div>`;
+  }).join('');
+}
+
+/* Newsletter */
+const newsForm = $('#news-form');
+newsForm.addEventListener('submit', async e => {
+  e.preventDefault();
+  if ($('[name="_gotcha"]', newsForm).checked || !validate(newsForm)) return;
+  const email = $('#news-email').value.trim();
+  const btn = $('button', newsForm); btn.disabled = true;
+  const ok = await sendForm({ _subject: 'Inscription à la lettre Yumiya', type: 'Newsletter', email, _replyto: email, langue: LANG.toUpperCase() });
+  btn.disabled = false;
+  if (ok) { newsForm.hidden = true; $('#news-success').hidden = false; anim('#news-success', { opacity: [0, 1], y: [10, 0] }, { duration: 0.5 }); }
+  else { const box = document.createElement('div'); newsForm.after(box); failBox(box, 'Inscription à la lettre Yumiya', { email }, "Votre message n'a pas pu être envoyé automatiquement. Envoyez-le-nous par email : il est déjà rédigé."); }
+});
+
+/* Accessibilité : focus maintenu dans les fenêtres ouvertes */
+addEventListener('keydown', e => {
+  if (e.key !== 'Tab' || !openLayer) return;
+  const f = $$('a[href], button:not([disabled]), input:not([type=hidden]):not(.hp), select, textarea, [tabindex="0"]', openLayer.el).filter(x => x.offsetParent !== null);
+  if (!f.length) return;
+  const first = f[0], last = f[f.length - 1];
+  if (e.shiftKey && document.activeElement === first) { last.focus(); e.preventDefault(); }
+  else if (!e.shiftKey && document.activeElement === last) { first.focus(); e.preventDefault(); }
+});
+
+/* Curseur « Voir » sur les photos produits */
+const cursor = $('#cursor');
+if (M && !reduced && finePointer && cursor) {
+  $('#cursor span').textContent = t('Voir');
+  let on = false;
+  addEventListener('pointermove', e => {
+    const over = !!e.target.closest('[data-cursor]');
+    M.animate(cursor, { x: e.clientX, y: e.clientY }, { type: 'spring', stiffness: 500, damping: 40 });
+    if (over !== on) { on = over; M.animate('#cursor span', { scale: over ? 1 : 0 }, SPRING); }
+  });
+}
 
 /* ═══════════════════════════════════════════════
    FAQ (accordéon animé)
