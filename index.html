@@ -3,282 +3,331 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1"/>
-<title>Yumiya Candle – Bougies gourmandes artisanales</title>
-<meta name="description" content="Bougies gourmandes coulées à la main, couche par couche, en Suisse romande. Cire de soja, mèche coton, zéro paraffine. Collections saisonnières et créations sur mesure."/>
-<meta name="theme-color" content="#120709"/>
+<title>Yumiya Candle – Bougies gourmandes artisanales, faites main en Suisse</title>
+<meta name="description" content="Des bougies qui ont l'air d'un dessert. Coulées à la main, couche par couche, en Suisse romande : cire de soja 100% végétale, mèche coton, zéro paraffine. Dès 8.90 CHF et créations sur mesure."/>
+<meta name="theme-color" content="#FBF4EC"/>
+<meta property="og:type" content="website"/>
 <meta property="og:title" content="Yumiya Candle – Bougies gourmandes artisanales"/>
-<meta property="og:description" content="Des bougies qui ont l'air d'un dessert. Faites main en Suisse."/>
+<meta property="og:description" content="Des bougies qui ont l'air d'un dessert — et qui sentent pareil. Faites main en Suisse."/>
 <meta property="og:image" content="assets/photo-coeurs.jpg"/>
 <link rel="icon" href="assets/logo-light.png"/>
 <link rel="preload" as="image" href="assets/candle-cutout.webp"/>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
-<link href="https://fonts.googleapis.com/css2?family=Anton&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;1,9..144,400&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&family=Fraunces:ital,opsz,wght,SOFT@0,9..144,300..600,100;1,9..144,300..600,100&display=swap" rel="stylesheet"/>
 <link rel="stylesheet" href="assets/style.css"/>
+<script>document.documentElement.classList.add("js");if(matchMedia("(prefers-reduced-motion: reduce)").matches)document.documentElement.classList.add("reduced")</script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"Product","name":"Bougie Gourmande Love","brand":{"@type":"Brand","name":"Yumiya Candle"},
+"description":"Bougie gourmande artisanale : cire de soja, couche fraise, chantilly de cire et petit cœur. Rose, fraise, vanille chaude.",
+"image":"assets/candle-portrait.jpg",
+"offers":{"@type":"AggregateOffer","priceCurrency":"CHF","lowPrice":"8.90","highPrice":"10.90","availability":"https://schema.org/InStock"}}
+</script>
 </head>
 <body>
 
-<!-- ═══ ÉCRAN D'OUVERTURE ═══ -->
-<div class="loader" id="loader" aria-hidden="true">
-  <div class="loader-in">
-    <div class="loader-flame" data-flame-svg></div>
-    <img src="assets/logo-light.png" alt=""/>
-    <div class="loader-name">Yumiya Candle</div>
-    <div class="loader-bar"><span id="loader-bar"></span></div>
-  </div>
+<a class="skip" href="#main">Aller au contenu</a>
+
+<!-- ═══ OUVERTURE ═══ -->
+<div class="intro" id="intro" aria-hidden="true">
+  <div class="intro-flame" data-flame></div>
+  <div class="intro-word"><span>Yumiya</span><em>Candle</em></div>
 </div>
 
-<!-- ═══ NAVIGATION ═══ -->
+<!-- ═══ COMPOSANT : MENU ═══ -->
+<div class="scrollbar" id="scrollbar"></div>
 <header class="nav" id="nav">
-  <a href="#top" class="nav-logo" aria-label="Yumiya Candle — accueil">
-    <img src="assets/logo-light.png" alt=""/><span>Yumiya Candle</span>
+  <a href="#top" class="brand" aria-label="Yumiya Candle — accueil">
+    <img src="assets/logo-light.png" alt=""/>
+    <span>Yumiya <em>Candle</em></span>
   </a>
-  <ul class="nav-links">
-    <li><a href="#couches">La bougie</a></li>
-    <li><a href="#coffret">Le coffret</a></li>
-    <li><a href="#gamme">La gamme</a></li>
-    <li><a href="#sur-mesure">Sur mesure</a></li>
-    <li><a href="#commander">Commander</a></li>
-  </ul>
-  <button class="nav-cart" id="cart-open" aria-label="Ouvrir le panier">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 7h12l-1 13H7L6 7z"/><path d="M9 7a3 3 0 0 1 6 0"/></svg>
-    <span class="t">Panier</span><span class="cart-count" id="cart-count">0</span>
-  </button>
-  <button class="burger" id="burger" aria-label="Menu"><span></span><span></span><span></span></button>
+  <nav class="nav-links" id="nav-links" aria-label="Navigation principale">
+    <span class="nav-pill" id="nav-pill"></span>
+    <a href="#bougie">La bougie</a>
+    <a href="#collections">Collections</a>
+    <a href="#love">Boutique</a>
+    <a href="#sur-mesure">Sur mesure</a>
+    <a href="#faq">FAQ</a>
+  </nav>
+  <div class="nav-end">
+    <a href="#commander" class="btn btn-sm btn-ghost nav-cta">Commander</a>
+    <button class="cart-btn" id="cart-open" aria-label="Ouvrir le panier">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M5.5 8h13l-1.2 12H6.7L5.5 8z"/><path d="M9 8a3 3 0 0 1 6 0"/></svg>
+      <span class="cart-count" id="cart-count">0</span>
+    </button>
+    <button class="burger" id="burger" aria-label="Menu" aria-expanded="false"><span></span><span></span></button>
+  </div>
 </header>
-<nav class="drawer" id="drawer">
-  <a href="#couches">La bougie</a>
-  <a href="#coffret">Le coffret</a>
-  <a href="#gamme">La gamme</a>
-  <a href="#sur-mesure">Sur mesure</a>
-  <a href="#commander">Commander</a>
-</nav>
+<div class="menu" id="menu">
+  <nav>
+    <a href="#bougie"><small>01</small>La bougie</a>
+    <a href="#collections"><small>02</small>Collections</a>
+    <a href="#love"><small>03</small>Boutique</a>
+    <a href="#sur-mesure"><small>04</small>Sur mesure</a>
+    <a href="#faq"><small>05</small>FAQ</a>
+    <a href="#commander"><small>06</small>Commander</a>
+  </nav>
+  <p>Fait main en Suisse romande · <a href="https://www.instagram.com/yumiyacandle" target="_blank" rel="noopener">@yumiyacandle</a></p>
+</div>
 
-<main id="top">
+<main id="main">
 
-  <!-- ═══ 1. HERO : la vraie bougie, qui s'allume au scroll ═══ -->
-  <section class="scene hero" data-scene="hero">
-    <div class="scene-sticky">
-      <div class="hero-bg"></div>
-      <div class="hero-warm" id="hero-warm"></div>
-      <div class="hero-grain"></div>
-      <div class="kicker hero-kicker">Artisanal · Végétal · Fait en Suisse</div>
-      <a href="#produit" class="hero-price" aria-label="Dès 8.90 CHF"><span>Dès<b>8.90</b>CHF</span></a>
-
-      <h1 class="hero-word display" id="hero-word" aria-label="Bougies gourmandes">Bougies</h1>
-
-      <div class="hero-candle" id="hero-candle">
-        <div class="hero-candle-in">
-          <div class="hero-glow" id="hero-glow"></div>
-          <div class="hero-flame" id="hero-flame" data-flame-svg></div>
-          <img src="assets/candle-cutout.webp" alt="Bougie gourmande Yumiya : chantilly de cire, cœur rouge, couche fraise dans un verre"/>
-          <div class="hero-floor"></div>
+  <!-- ═══ COMPOSANT : EN-TÊTE (HERO) ═══ -->
+  <section class="hero" id="top">
+    <div class="hero-bg" aria-hidden="true"><span class="blob b1"></span><span class="blob b2"></span></div>
+    <div class="container hero-grid">
+      <div class="hero-copy">
+        <a href="#love" class="chip chip-live" data-hero-in><span class="dot"></span>Collection St-Valentin · disponible</a>
+        <h1 class="display-xl" id="hero-title">Des bougies qui ont l'air d'un <em>dessert.</em></h1>
+        <p class="lead" data-hero-in>Coulées à la main, couche par couche, dans notre atelier en Suisse romande. Rose, fraise, vanille chaude — et si la tienne n'existe pas encore, on la crée pour toi.</p>
+        <div class="hero-cta" data-hero-in>
+          <a href="#love" class="btn btn-primary" data-magnetic><span>Découvrir la Love</span><span class="btn-tag">dès 8.90 CHF</span></a>
+          <a href="#sur-mesure" class="btn btn-ghost">Créer la mienne</a>
         </div>
+        <ul class="hero-trust" data-hero-in>
+          <li><b>100%</b> cire de soja</li>
+          <li><b>0</b> paraffine</li>
+          <li><b>~30 h</b> de douceur</li>
+        </ul>
       </div>
-      <div class="hearts" id="hearts"></div>
-
-      <div class="hero-script serif-it" id="hero-script" aria-hidden="true"><span>gourmandes.</span></div>
-
-      <div class="hero-side l" id="side-l">
-        <span class="display">Coulée</span><span class="serif-it">à la main.</span>
-        <p>Une par une, couche par couche, dans notre atelier en Suisse romande.</p>
-      </div>
-      <div class="hero-side r" id="side-r">
-        <span class="display">Allume</span><span class="serif-it">le moment.</span>
-        <p>Rose, fraise, vanille chaude. Jusqu'à ~30 h de douceur.</p>
-      </div>
-
-      <div class="hero-bottom" id="hero-bottom">
-        <p class="lead">Des bougies qui ont l'air d'un dessert — et qui sentent pareil. Et si la tienne n'existe pas encore, on la crée pour toi.</p>
-        <div class="hero-cta">
-          <a href="#produit" class="btn">Voir la bougie</a>
-          <a href="#sur-mesure" class="btn btn-ghost">Commande perso</a>
-        </div>
-      </div>
-      <div class="scroll-hint" id="scroll-hint"></div>
-    </div>
-  </section>
-
-  <div class="marquee" aria-hidden="true"><div class="marquee-track">
-    <span>Cire de soja 100% végétale</span><span>Fait main en Suisse</span><span>Mèche en coton</span><span>Zéro paraffine</span><span>Commandes sur mesure</span><span>Livraison soignée</span>
-    <span>Cire de soja 100% végétale</span><span>Fait main en Suisse</span><span>Mèche en coton</span><span>Zéro paraffine</span><span>Commandes sur mesure</span><span>Livraison soignée</span>
-  </div></div>
-
-  <!-- ═══ 2. MANIFESTE ═══ -->
-  <section class="scene manifest" data-scene="manifest">
-    <div class="scene-sticky">
-      <p id="manifest-text">Pas de production en série. Pas de compromis. Juste de la <em>cire de soja</em>, une <em>mèche en coton</em> et des senteurs qui donnent <em>faim.</em></p>
-    </div>
-  </section>
-
-  <!-- ═══ 3. COUCHE PAR COUCHE ═══ -->
-  <section class="scene stack" id="couches" data-scene="stack">
-    <div class="scene-sticky">
-      <div class="stack-head" id="stack-head">
-        <div class="kicker">Anatomie d'une bougie</div>
-        <h2 class="display lines">Couche<br/>par couche.</h2>
-        <p class="lead">Chaque étage est coulé, fouetté et décoré à la main. Voici ce qu'il y a dans ton verre.</p>
-      </div>
-      <div class="stage" id="stage">
-        <img class="stage-photo" id="stage-photo" src="assets/candle-cutout.webp" alt="" loading="lazy"/>
-        <!-- calques dessinés par main.js -->
-        <div class="labels" id="labels"></div>
-      </div>
-      <div class="stack-end" id="stack-end">
-        <h3 class="display">6 couches.<br/>0 machine.</h3>
-        <p>Chaque bougie est unique — comme celle ou celui qui la reçoit.</p>
-      </div>
-      <div class="progress" id="progress"><span></span><span></span><span></span><span></span><span></span><span></span></div>
-    </div>
-  </section>
-
-  <!-- ═══ 4. LE COFFRET ═══ -->
-  <section class="scene box-scene" id="coffret" data-scene="box" data-nav="light">
-    <div class="scene-sticky">
-      <div class="box-copy">
-        <div class="kicker">Prête à offrir</div>
-        <h2 class="display lines">Le<br/><em class="serif-it">coffret.</em></h2>
-        <p class="lead">Chaque bougie part emballée à la main, calée dans son papier de soie. Il ne reste qu'à l'offrir — ou à te la garder.</p>
-        <div class="box-steps">
-          <div class="box-step"><b>01</b><span>Coulée et décorée à la main dans notre atelier</span></div>
-          <div class="box-step"><b>02</b><span>Emballée avec soin, papier de soie et ruban</span></div>
-          <div class="box-step"><b>03</b><span>Livrée partout en Suisse</span></div>
-        </div>
-      </div>
-      <div class="box-wrap">
-        <div class="box">
-          <div class="box-shadow"></div>
-          <div class="box-back"></div>
-          <div class="box-tissue" id="box-tissue"></div>
-          <div class="box-candle"><div id="box-candle-in"><img src="assets/candle-cutout.webp" alt="" loading="lazy"/></div></div>
-          <div class="box-front">
-            <img src="assets/logo-light.png" alt=""/>
-            <small>Handmade in Switzerland</small>
-          </div>
-          <div class="box-lid" id="box-lid">
-            <div class="box-lid-top"><div class="box-ribbon"></div><span>Yumiya Candle</span></div>
+      <div class="hero-visual" id="hero-visual">
+        <div class="plate" aria-hidden="true"></div>
+        <svg class="badge-ring" viewBox="0 0 200 200" aria-hidden="true">
+          <defs><path id="ring" d="M100,100 m-78,0 a78,78 0 1,1 156,0 a78,78 0 1,1 -156,0"/></defs>
+          <text><textPath href="#ring">fait main · cire de soja · Suisse romande · zéro paraffine · </textPath></text>
+        </svg>
+        <div class="hero-candle" id="hero-candle">
+          <div class="candle-wrap">
+            <div class="glow" aria-hidden="true"></div>
+            <div class="wick-flame" data-flame aria-hidden="true"></div>
+            <img src="assets/candle-cutout.webp" alt="Bougie gourmande Love : chantilly de cire, cœur rouge et couche fraise dans un verre" width="559" height="864"/>
           </div>
         </div>
+        <div class="float-hearts" id="float-hearts" aria-hidden="true"></div>
+        <div class="hero-note" data-hero-in>
+          <span class="stars">★★★★★</span>
+          <p>« Une bougie qui sent divinement bon. »</p>
+          <small>Camille B., Lausanne</small>
+        </div>
+      </div>
+    </div>
+    <a href="#bougie" class="scroll-cue" aria-label="Défiler"><span></span></a>
+  </section>
+
+  <!-- ═══ BANDEAU ═══ -->
+  <div class="ticker" aria-hidden="true">
+    <div class="ticker-track" id="ticker">
+      <span>Cire de soja 100% végétale</span><i>✦</i><span>Mèche en coton</span><i>✦</i><span>Zéro paraffine</span><i>✦</i><span>Fait main en Suisse</span><i>✦</i><span>Créations sur mesure</span><i>✦</i><span>Emballée à la main</span><i>✦</i>
+    </div>
+  </div>
+
+  <!-- ═══ SCÈNE : ALLUME-LA ═══ -->
+  <section class="ignite" id="bougie" data-scene="ignite">
+    <div class="ignite-sticky">
+      <div class="ignite-sky" id="ignite-sky" aria-hidden="true"></div>
+      <div class="ignite-lines">
+        <p class="ig-line" data-ig="0"><span class="kicker">Le rituel</span>Le soir tombe.</p>
+        <p class="ig-line" data-ig="1">Une allumette, <em>une flamme.</em></p>
+        <p class="ig-line" data-ig="2">Et la pièce sent la <em>fraise</em> &amp; la <em>vanille chaude.</em></p>
+      </div>
+      <div class="ignite-candle" id="ignite-candle">
+        <div class="candle-wrap">
+          <div class="glow big" id="ig-glow" aria-hidden="true"></div>
+          <div class="wick-flame" id="ig-flame" data-flame aria-hidden="true"></div>
+          <img src="assets/candle-cutout.webp" alt="" loading="lazy" width="559" height="864"/>
+        </div>
+        <div class="ignite-floor" aria-hidden="true"></div>
+      </div>
+      <div class="ignite-end" id="ignite-end">
+        <div class="stat"><b data-count="30" data-prefix="~" data-suffix=" h">~30 h</b><span>de combustion<br/>pour la grande</span></div>
+        <div class="stat"><b data-count="6">6</b><span>couches coulées<br/>à la main</span></div>
+        <div class="stat"><b>1/1</b><span>chaque bougie<br/>est unique</span></div>
       </div>
     </div>
   </section>
 
-  <!-- ═══ 5. LA GAMME ═══ -->
-  <section class="lineup" id="gamme" data-nav="light">
-    <div class="lineup-head">
-      <div class="kicker rv" style="color:var(--rose-2)">Nos collections</div>
-      <h2 class="display lines">La gamme.</h2>
-      <p class="rv">Des collections saisonnières en petites séries, et des créations uniques pour tes moments à toi.</p>
+  <!-- ═══ SCÈNE : ANATOMIE ═══ -->
+  <section class="anatomy" id="anatomie" data-scene="anatomy">
+    <div class="anatomy-sticky container">
+      <div class="anatomy-copy">
+        <span class="kicker">Anatomie d'une bougie</span>
+        <h2 class="display-l">Couche par <em>couche.</em></h2>
+        <ol class="layers" id="layers">
+          <li data-x="54" data-y="3"><b>01</b><div><strong>Mèche en coton</strong><span>Naturelle, pour une combustion propre et régulière.</span></div></li>
+          <li data-x="57" data-y="34"><b>02</b><div><strong>Le petit cœur</strong><span>Posé à la main, à la toute fin. La signature Love.</span></div></li>
+          <li data-x="22" data-y="46"><b>03</b><div><strong>Chantilly de cire</strong><span>Fouettée puis pochée comme une vraie crème.</span></div></li>
+          <li data-x="80" data-y="63"><b>04</b><div><strong>Couche fraise</strong><span>Rose, fraise, vanille chaude : le cœur du parfum.</span></div></li>
+          <li data-x="28" data-y="78"><b>05</b><div><strong>Cire de soja</strong><span>100% végétale, zéro paraffine. La base de tout.</span></div></li>
+          <li data-x="90" data-y="88"><b>06</b><div><strong>Verre transparent</strong><span>Pour voir chaque étage — et le réutiliser ensuite.</span></div></li>
+        </ol>
+      </div>
+      <div class="anatomy-visual">
+        <div class="anatomy-candle" id="anatomy-candle">
+          <img src="assets/candle-cutout.webp" alt="Les couches de la bougie Love" loading="lazy" width="559" height="864"/>
+          <div class="hotspots" id="hotspots"></div>
+        </div>
+        <div class="anatomy-count" aria-hidden="true"><span id="anat-n">01</span><small>/06</small></div>
+      </div>
     </div>
-    <div class="lineup-grid">
-      <article class="card">
-        <div class="card-media">
-          <span class="pill">Disponible</span>
-          <img src="assets/candle-portrait.jpg" alt="Bougie gourmande Love, collection St-Valentin" loading="lazy"/>
+  </section>
+
+  <!-- ═══ COLLECTIONS ═══ -->
+  <section class="section collections" id="collections">
+    <div class="container">
+      <header class="section-head">
+        <span class="kicker" data-rv>Nos collections</span>
+        <h2 class="display-l" data-split>Une bougie pour <em>chaque moment.</em></h2>
+        <p class="lead" data-rv>Des collections saisonnières en petites séries — et des pièces uniques pour tes moments à toi.</p>
+      </header>
+      <div class="coll-grid">
+        <a class="coll-card" href="#love" data-rv data-tilt>
+          <div class="coll-media"><img src="assets/candle-portrait.jpg" alt="Bougie Love, collection St-Valentin, entourée de roses" loading="lazy"/></div>
+          <span class="badge badge-red">Disponible</span>
+          <div class="coll-body">
+            <h3>St-Valentin</h3>
+            <p>Rose · Fraise · Vanille chaude</p>
+            <div class="coll-foot"><strong>dès 8.90 CHF</strong><span class="arrow">→</span></div>
+          </div>
+        </a>
+        <button class="coll-card spring" type="button" data-open="notify" data-rv data-tilt>
+          <div class="coll-media"><img class="tint-spring" src="assets/candle-cutout.webp" alt="Aperçu de la future bougie Printemps" loading="lazy"/></div>
+          <span class="badge badge-soft">Bientôt</span>
+          <div class="coll-body">
+            <h3>Pâques</h3>
+            <p>Fleurs de printemps · Miel · Vanille douce</p>
+            <div class="coll-foot"><strong>M'alerter</strong><span class="arrow">→</span></div>
+          </div>
+        </button>
+        <a class="coll-card custom" href="#sur-mesure" data-rv data-tilt>
+          <div class="coll-media"><img class="tint-custom" src="assets/candle-cutout.webp" alt="Aperçu d'une bougie sur mesure" loading="lazy"/><span class="sparkle" aria-hidden="true">✦</span></div>
+          <span class="badge badge-gold">Sur mesure</span>
+          <div class="coll-body">
+            <h3>La tienne</h3>
+            <p>Ta senteur · Tes couleurs · Ton message</p>
+            <div class="coll-foot"><strong>Prix sur demande</strong><span class="arrow">→</span></div>
+          </div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ BOUTIQUE : PRODUIT + COMPOSANT TARIFS ═══ -->
+  <section class="section product" id="love">
+    <div class="container product-grid">
+      <div class="gallery" data-rv>
+        <div class="gallery-main" id="gallery-main">
+          <img src="assets/photo-coeurs.jpg" alt="Bougie gourmande Love entourée de cœurs rouges"/>
+          <span class="badge badge-red">Best-seller</span>
         </div>
-        <div class="card-body">
-          <h3>St-Valentin</h3>
-          <p>Rose · Fraise · Vanille chaude</p>
-          <div class="card-foot"><strong>dès 8.90 CHF</strong><a href="#produit">Voir <span>→</span></a></div>
+        <div class="gallery-thumbs" id="gallery-thumbs">
+          <button class="on" data-src="assets/photo-coeurs.jpg" data-alt="Bougie Love entourée de cœurs rouges" aria-label="Photo 1"><img src="assets/photo-coeurs.jpg" alt="" loading="lazy"/></button>
+          <button data-src="assets/candle-portrait.jpg" data-alt="Bougie Love avec des roses" aria-label="Photo 2"><img src="assets/candle-portrait.jpg" alt="" loading="lazy"/></button>
+          <button data-src="assets/photo-bokeh.jpg" data-alt="Bougie Love sur fond de lumières" aria-label="Photo 3"><img src="assets/photo-bokeh.jpg" alt="" loading="lazy"/></button>
+          <button data-src="assets/photo-roses.jpg" data-alt="Bougie Love de près" aria-label="Photo 4"><img src="assets/photo-roses.jpg" alt="" loading="lazy"/></button>
+          <button data-src="assets/candle-real.jpg" data-alt="Bougie Love photographiée à l'atelier" aria-label="Photo 5"><img src="assets/candle-real.jpg" alt="" loading="lazy"/></button>
         </div>
+      </div>
+
+      <div class="product-info">
+        <span class="kicker" data-rv>Collection St-Valentin</span>
+        <h2 class="display-l" data-split>Bougie gourmande <em>Love.</em></h2>
+        <p class="lead" data-rv>Une base de cire de soja, une couche fraise, une chantilly de cire fouettée et son petit cœur. Un parfum enveloppant, pour l'amour — ou pour toi.</p>
+        <div class="notes" data-rv>
+          <span><i style="--c:#E8A3B0"></i>Rose</span>
+          <span><i style="--c:#D7323F"></i>Fraise</span>
+          <span><i style="--c:#E9C48E"></i>Vanille chaude</span>
+        </div>
+
+        <!-- Composant : Tarifs -->
+        <div class="pricing" role="radiogroup" aria-label="Choisis ta taille" data-rv>
+          <span class="pricing-pill" id="pricing-pill" aria-hidden="true"></span>
+          <button class="price-card on" role="radio" aria-checked="true" data-size="petite">
+            <span class="pc-top"><b>Petite</b><em>8.90 CHF</em></span>
+            <span class="pc-meta">90 g · ~20 h de combustion</span>
+            <span class="pc-bar"><i style="--w:66%"></i></span>
+          </button>
+          <button class="price-card" role="radio" aria-checked="false" data-size="grande">
+            <span class="pc-top"><b>Grande</b><em>10.90 CHF</em></span>
+            <span class="pc-meta">180 g · ~30 h de combustion</span>
+            <span class="pc-bar"><i style="--w:100%"></i></span>
+          </button>
+        </div>
+
+        <div class="buy" data-rv>
+          <div class="qty" aria-label="Quantité">
+            <button id="qty-minus" aria-label="Moins">−</button>
+            <span id="qty-val">1</span>
+            <button id="qty-plus" aria-label="Plus">+</button>
+          </div>
+          <button class="btn btn-primary btn-block" id="add-cart" data-magnetic><span>Ajouter au panier</span><span class="btn-tag" id="buy-price">8.90 CHF</span></button>
+        </div>
+        <dl class="specs" data-rv>
+          <div><dt>Cire</dt><dd>Soja, 100% végétale</dd></div>
+          <div><dt>Mèche</dt><dd>Coton naturel</dd></div>
+          <div><dt>Contenant</dt><dd>Verre transparent</dd></div>
+          <div><dt>Fabrication</dt><dd>À la main, en Suisse</dd></div>
+        </dl>
+        <p class="pay-note" data-rv><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="4" y="10" width="16" height="10" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg>Aucun paiement en ligne : on te confirme sous 24 h, puis Twint ou virement.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ VALEURS ═══ -->
+  <section class="section values">
+    <div class="container values-grid">
+      <article class="value" data-rv>
+        <span class="value-ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M5 19c8 0 14-6 14-14C11 5 5 11 5 19z"/><path d="M5 19 13 11"/></svg></span>
+        <b><span data-count="100">100</span>%</b><strong>Végétal</strong><p>Cire de soja pure et mèche en coton. Zéro paraffine, une combustion propre.</p>
       </article>
-      <article class="card">
-        <div class="card-media svgbg" style="background:linear-gradient(160deg,#eef6e6,#f9f1d8)">
-          <span class="pill soft">Bientôt</span>
-          <div data-candle="paques"></div>
-        </div>
-        <div class="card-body">
-          <h3>Pâques</h3>
-          <p>Fleurs de printemps · Miel · Vanille douce</p>
-          <div class="card-foot"><strong style="font-style:italic;font-size:1rem">Ce printemps</strong><button data-open="notify">M'alerter <span>→</span></button></div>
-        </div>
+      <article class="value" data-rv>
+        <span class="value-ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M7 11V6a1.5 1.5 0 0 1 3 0v5M10 10V4.5a1.5 1.5 0 0 1 3 0V10M13 10V5.5a1.5 1.5 0 0 1 3 0V12M16 9a1.5 1.5 0 0 1 3 0v5a7 7 0 0 1-7 7h-1a6 6 0 0 1-5-3l-2.5-4.5a1.5 1.5 0 0 1 2.5-1.5L7 13"/></svg></span>
+        <b>1/1</b><strong>Fait main</strong><p>Chaque bougie est coulée, fouettée et décorée à la main. Aucune n'est identique.</p>
       </article>
-      <article class="card">
-        <div class="card-media svgbg" style="background:radial-gradient(circle at 50% 60%,#4a1422,#1c0b0f 75%)">
-          <span class="pill gold">Sur mesure</span>
-          <div data-candle="custom"></div>
-        </div>
-        <div class="card-body">
-          <h3>La tienne</h3>
-          <p>Ta senteur · Tes couleurs · Ton message</p>
-          <div class="card-foot"><strong style="font-size:1rem">Prix sur demande</strong><a href="#sur-mesure">Créer <span>→</span></a></div>
-        </div>
+      <article class="value" data-rv>
+        <span class="value-ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="3" width="18" height="18" rx="3"/><path d="M12 7v10M7 12h10"/></svg></span>
+        <b>CH</b><strong>Made in Suisse</strong><p>Fabriquée localement en Suisse romande et livrée avec soin partout en Suisse.</p>
+      </article>
+      <article class="value" data-rv>
+        <span class="value-ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 9h16v11H4z"/><path d="M3 6h18v3H3zM12 6v14M12 6c-2-3-6-3-6 0M12 6c2-3 6-3 6 0"/></svg></span>
+        <b>❤</b><strong>Prête à offrir</strong><p>Emballée à la main avec papier de soie. Il ne reste qu'à l'offrir — ou à la garder.</p>
       </article>
     </div>
   </section>
 
-  <!-- ═══ 6. PRODUIT ═══ -->
-  <section class="product" id="produit">
-    <div class="product-media">
-      <div class="product-sticky">
-        <div class="thumbs" id="thumbs">
-          <button class="on" data-src="assets/photo-coeurs.jpg" aria-label="Photo 1"><img src="assets/photo-coeurs.jpg" alt="" loading="lazy"/></button>
-          <button data-src="assets/candle-portrait.jpg" aria-label="Photo 2"><img src="assets/candle-portrait.jpg" alt="" loading="lazy"/></button>
-          <button data-src="assets/photo-bokeh.jpg" aria-label="Photo 3"><img src="assets/photo-bokeh.jpg" alt="" loading="lazy"/></button>
-          <button data-src="assets/photo-roses.jpg" aria-label="Photo 4"><img src="assets/photo-roses.jpg" alt="" loading="lazy"/></button>
-          <button data-src="assets/candle-real.jpg" aria-label="Photo 5"><img src="assets/candle-real.jpg" alt="" loading="lazy"/></button>
+  <!-- ═══ SUR MESURE ═══ -->
+  <section class="section custom" id="sur-mesure" data-dark>
+    <div class="container custom-grid">
+      <div class="custom-copy">
+        <span class="kicker kicker-gold" data-rv>Sur mesure</span>
+        <h2 class="display-l" data-split>Ta bougie, <em>tes règles.</em></h2>
+        <p class="lead" data-rv>Une senteur spéciale, des couleurs particulières, un prénom, une date, un événement ? On imagine ta bougie avec toi — exactement comme tu la vois.</p>
+        <div class="occasions">
+          <div class="occasion" data-rv><b>01</b><div><strong>Mariage &amp; fiançailles</strong><span>Bougie souvenir avec date, prénoms et parfum choisi.</span></div></div>
+          <div class="occasion" data-rv><b>02</b><div><strong>Anniversaire</strong><span>Couleurs, senteur et message personnalisés.</span></div></div>
+          <div class="occasion" data-rv><b>03</b><div><strong>Cadeau d'entreprise</strong><span>Une collection unique à votre image, en quantité.</span></div></div>
+          <div class="occasion" data-rv><b>04</b><div><strong>Toute autre occasion</strong><span>Naissance, baby shower, crémaillère…</span></div></div>
         </div>
-        <div class="main-photo" id="main-photo">
-          <img src="assets/photo-coeurs.jpg" alt="Bougie gourmande Love entourée de cœurs rouges" loading="lazy"/>
-        </div>
       </div>
-    </div>
-    <div class="product-info">
-      <div class="kicker rv">Collection St-Valentin</div>
-      <h2 class="display lines">Bougie<br/>gourmande<br/><em class="serif-it">Love.</em></h2>
-      <p class="lead rv">Rose, fraise et vanille chaude. Une base de cire de soja, une couche fraise, une chantilly de cire fouettée et son petit cœur. Un parfum enveloppant pour l'amour.</p>
-      <div class="notes rv"><span>Rose</span><span>Fraise</span><span>Vanille chaude</span></div>
-      <div class="specs rv">
-        <div><small>Cire</small><span>Soja 100% végétale</span></div>
-        <div><small>Mèche</small><span>Coton naturel</span></div>
-        <div><small>Contenant</small><span>Verre transparent</span></div>
-        <div><small>Fabrication</small><span>À la main, en Suisse</span></div>
-      </div>
-      <div class="sizes rv">
-        <button class="size on" data-size="petite"><em data-price="petite"></em><b>Petite</b><small>90 g · ~20 h</small></button>
-        <button class="size" data-size="grande"><em data-price="grande"></em><b>Grande</b><small>180 g · ~30 h</small></button>
-      </div>
-      <div class="buy rv">
-        <div class="price-big" id="price-big"></div>
-        <button class="btn" id="add-cart">Ajouter au panier</button>
-        <button class="btn btn-ghost" id="buy-now">Commander</button>
-      </div>
-    </div>
-  </section>
 
-  <!-- ═══ 7. VALEURS ═══ -->
-  <section class="values">
-    <div class="value rv"><b>100%</b><strong>Végétal</strong><p>Cire de soja pure et mèche en coton. Zéro paraffine.</p></div>
-    <div class="value rv"><b>1 / 1</b><strong>Fait main</strong><p>Chaque bougie est coulée à la main, une par une. Chacune est unique.</p></div>
-    <div class="value rv"><b>CH</b><strong>Made in Suisse</strong><p>Fabriquée localement en Suisse romande, livrée avec soin.</p></div>
-  </section>
-
-  <!-- ═══ 8. SUR MESURE ═══ -->
-  <section class="custom" id="sur-mesure">
-    <div class="custom-inner">
-      <div>
-        <div class="kicker rv">Sur mesure</div>
-        <h2 class="display lines">Ta bougie,<br/><em class="serif-it">tes règles.</em></h2>
-        <p class="lead rv">Une senteur spéciale, des couleurs particulières, un message à graver, un événement unique ? On crée ta bougie exactement comme tu l'imagines.</p>
-        <div class="occasions rv">
-          <div class="occasion"><b>01</b><div><strong>Mariage &amp; fiançailles</strong><span>Bougie souvenir avec date, prénoms et parfum choisi</span></div></div>
-          <div class="occasion"><b>02</b><div><strong>Anniversaire</strong><span>Couleurs, senteur et message personnalisés</span></div></div>
-          <div class="occasion"><b>03</b><div><strong>Cadeau d'entreprise</strong><span>Une collection unique à votre image, en quantité</span></div></div>
-          <div class="occasion"><b>04</b><div><strong>Toute autre occasion</strong><span>Naissance, baby shower, déménagement…</span></div></div>
-        </div>
-      </div>
-      <div class="form-box rv">
+      <div class="card-form dark" data-rv>
         <form id="custom-form" novalidate>
           <h3>Décris ta bougie idéale</h3>
-          <p>Plus tu nous donnes de détails, mieux on peut créer quelque chose qui te ressemble.</p>
+          <p>Réponse sous 48 h. Plus tu donnes de détails, plus elle te ressemblera.</p>
           <input type="checkbox" name="botcheck" class="hp" tabindex="-1" autocomplete="off"/>
-          <div class="field"><label for="cm-name">Ton prénom *</label><input id="cm-name" name="Nom" placeholder="Marie" required/></div>
+          <fieldset class="field">
+            <legend>Pour quelle occasion ? *</legend>
+            <div class="chips" data-required>
+              <label><input type="radio" name="Occasion" value="Mariage / Fiançailles" required/><span>Mariage</span></label>
+              <label><input type="radio" name="Occasion" value="Anniversaire"/><span>Anniversaire</span></label>
+              <label><input type="radio" name="Occasion" value="Naissance / Baby shower"/><span>Naissance</span></label>
+              <label><input type="radio" name="Occasion" value="Cadeau d'entreprise"/><span>Entreprise</span></label>
+              <label><input type="radio" name="Occasion" value="Juste pour moi"/><span>Pour moi</span></label>
+              <label><input type="radio" name="Occasion" value="Autre"/><span>Autre</span></label>
+            </div>
+          </fieldset>
           <div class="row2">
-            <div class="field"><label for="cm-email">Email *</label><input id="cm-email" name="Email client" type="email" placeholder="marie@email.com" required/></div>
-            <div class="field"><label for="cm-insta">Instagram</label><input id="cm-insta" name="Instagram" placeholder="@tonpseudo"/></div>
-          </div>
-          <div class="field"><label for="cm-occasion">Pour quelle occasion ? *</label>
-            <select id="cm-occasion" name="Occasion" required><option value="">— Choisir —</option><option>Mariage / Fiançailles</option><option>Anniversaire</option><option>Naissance / Baby shower</option><option>Cadeau d'entreprise</option><option>Fête / Événement</option><option>Juste pour moi</option><option>Autre</option></select>
+            <div class="field"><label for="cm-name">Ton prénom *</label><input id="cm-name" name="Nom" autocomplete="given-name" placeholder="Marie" required/></div>
+            <div class="field"><label for="cm-email">Email *</label><input id="cm-email" name="Email client" type="email" autocomplete="email" placeholder="marie@email.com" required/></div>
           </div>
           <div class="row2">
             <div class="field"><label for="cm-scent">Senteur(s)</label><input id="cm-scent" name="Senteur" placeholder="Jasmin, vanille…"/></div>
@@ -287,145 +336,184 @@
             </div>
           </div>
           <div class="field"><label for="cm-colors">Couleurs / ambiance</label><input id="cm-colors" name="Couleurs" placeholder="Tons pastel, bordeaux et doré…"/></div>
-          <div class="field"><label for="cm-vision">Décris ta vision *</label><textarea id="cm-vision" name="Vision" placeholder="Raconte-nous ton idée, l'ambiance souhaitée, un message à inclure…" required></textarea></div>
-          <button class="btn" type="submit">Envoyer ma demande</button>
+          <div class="field"><label for="cm-vision">Ta vision *</label><textarea id="cm-vision" name="Vision" placeholder="Ton idée, l'ambiance, un message à inclure…" required></textarea></div>
+          <div class="field"><label for="cm-insta">Instagram</label><input id="cm-insta" name="Instagram" placeholder="@tonpseudo"/></div>
+          <button class="btn btn-gold btn-block" type="submit">Envoyer ma demande</button>
         </form>
-        <div class="success" id="custom-success"><h4>Demande reçue !</h4><p>On adore l'idée. On te répond sous 48 h pour imaginer ta bougie ensemble.</p></div>
+        <div class="success" id="custom-success" role="status"><div class="success-ic">✦</div><h4>Demande reçue !</h4><p>On adore l'idée. On te répond sous 48 h pour imaginer ta bougie ensemble.</p></div>
       </div>
     </div>
   </section>
 
-  <!-- ═══ 9. AVIS ═══ -->
-  <section class="reviews">
-    <div class="reviews-head">
-      <h2 class="display lines">Elles <em class="serif-it">adorent.</em></h2>
-      <p class="lead rv">Ce que nos clientes disent de leurs bougies.</p>
+  <!-- ═══ COMPOSANT : AVIS CLIENTS ═══ -->
+  <section class="section reviews">
+    <div class="container">
+      <header class="section-head center">
+        <span class="kicker" data-rv>Avis clientes</span>
+        <h2 class="display-l" data-split>Elles en parlent <em>mieux que nous.</em></h2>
+      </header>
     </div>
-    <div class="reviews-track" id="reviews-track"></div>
+    <div class="reviews-rows" id="reviews"></div>
+    <div class="container center" data-rv>
+      <a class="btn btn-ghost" href="https://www.instagram.com/yumiyacandle" target="_blank" rel="noopener">Voir les coulisses sur Instagram</a>
+    </div>
   </section>
 
-  <!-- ═══ 10. COMMANDER ═══ -->
-  <section class="order" id="commander" data-nav="light">
-    <div class="order-inner">
-      <div>
-        <div class="kicker rv">On discute ?</div>
-        <h2 class="display lines">Passe une<br/><em class="serif-it">demande.</em></h2>
-        <p class="lead rv">Aucun paiement en ligne. Tu envoies ta demande, on te confirme et on organise tout par message. Simple, humain, direct.</p>
-        <div class="steps rv">
-          <div class="step"><b>1</b><span>Envoie ta demande via le formulaire</span></div>
-          <div class="step"><b>2</b><span>On te confirme ta commande sous 24 h</span></div>
-          <div class="step"><b>3</b><span>Paiement Twint ou virement, puis livraison</span></div>
-        </div>
+  <!-- ═══ FAQ ═══ -->
+  <section class="section faq" id="faq">
+    <div class="container faq-grid">
+      <header class="section-head">
+        <span class="kicker" data-rv>Questions fréquentes</span>
+        <h2 class="display-l" data-split>Tout ce que tu <em>te demandes.</em></h2>
+        <p class="lead" data-rv>Une autre question ? Écris-nous sur Instagram ou par email, on répond vite.</p>
+      </header>
+      <div class="accordion" id="accordion">
+        <details data-rv><summary>Combien de temps dure une bougie ?<i></i></summary><div class="acc-body"><p>Environ <strong>20 heures</strong> pour la petite (90 g) et <strong>30 heures</strong> pour la grande (180 g).</p></div></details>
+        <details data-rv><summary>De quoi sont-elles faites ?<i></i></summary><div class="acc-body"><p>De cire de soja 100% végétale, d'une mèche en coton naturel et de fragrances choisies avec soin, dans un verre transparent. Zéro paraffine.</p></div></details>
+        <details data-rv><summary>Comment se passe le paiement ?<i></i></summary><div class="acc-body"><p>Aucun paiement en ligne. Tu envoies ta demande, on te confirme ta commande sous 24 h, puis tu règles par <strong>Twint</strong> ou <strong>virement bancaire</strong>.</p></div></details>
+        <details data-rv><summary>Vous livrez où ?<i></i></summary><div class="acc-body"><p>Partout en Suisse. Chaque bougie part emballée à la main dans son papier de soie.</p></div></details>
+        <details data-rv><summary>Comment fonctionne le sur mesure ?<i></i></summary><div class="acc-body"><p>Tu nous décris ton idée via le formulaire (occasion, senteur, couleurs, message). On te répond sous 48 h pour l'imaginer ensemble et te faire une proposition. Le prix dépend de la création.</p></div></details>
+        <details data-rv><summary>Des conseils pour bien la faire brûler ?<i></i></summary><div class="acc-body"><p>À la première utilisation, laisse-la brûler jusqu'à ce que toute la surface soit fondue. Recoupe la mèche à environ 5 mm avant chaque allumage, et ne la laisse jamais sans surveillance. Et même si elle en a l'air : elle ne se mange pas 😉</p></div></details>
       </div>
-      <div class="form-box rv">
+    </div>
+  </section>
+
+  <!-- ═══ COMMANDER ═══ -->
+  <section class="section order" id="commander">
+    <div class="container order-grid">
+      <div class="order-copy">
+        <span class="kicker" data-rv>On discute ?</span>
+        <h2 class="display-l" data-split>Passe ta <em>commande.</em></h2>
+        <p class="lead" data-rv>Simple, humain, direct : pas de paiement en ligne, on organise tout par message.</p>
+        <ol class="steps">
+          <li data-rv><b>1</b><div><strong>Tu envoies ta demande</strong><span>Via le formulaire ou le panier.</span></div></li>
+          <li data-rv><b>2</b><div><strong>On confirme sous 24 h</strong><span>Disponibilité, total et livraison.</span></div></li>
+          <li data-rv><b>3</b><div><strong>Twint ou virement</strong><span>Puis ta bougie part, emballée à la main.</span></div></li>
+        </ol>
+      </div>
+      <div class="card-form" data-rv>
         <form id="contact-form" novalidate>
           <h3>Ta demande</h3>
           <p>Standard ou sur mesure — choisis le type ci-dessous.</p>
           <input type="checkbox" name="botcheck" class="hp" tabindex="-1" autocomplete="off"/>
-          <div class="note"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 8v5M12 16h.01"/></svg><span>Aucun paiement en ligne. On te contacte pour Twint ou virement.</span></div>
-          <div class="field"><label for="cf-name">Ton prénom *</label><input id="cf-name" name="Nom" placeholder="Marie" required/></div>
           <div class="row2">
-            <div class="field"><label for="cf-email">Email *</label><input id="cf-email" name="Email client" type="email" placeholder="marie@email.com" required/></div>
-            <div class="field"><label for="cf-insta">Instagram</label><input id="cf-insta" name="Instagram" placeholder="@tonpseudo"/></div>
+            <div class="field"><label for="cf-name">Ton prénom *</label><input id="cf-name" name="Nom" autocomplete="given-name" placeholder="Marie" required/></div>
+            <div class="field"><label for="cf-email">Email *</label><input id="cf-email" name="Email client" type="email" autocomplete="email" placeholder="marie@email.com" required/></div>
           </div>
           <div class="field"><label for="cf-type">Type de commande *</label>
             <select id="cf-type" name="Type de commande" required>
               <option value="">— Choisir —</option>
-              <option value="Bougie St-Valentin (standard)">Bougie St-Valentin (disponible)</option>
+              <option value="Bougie St-Valentin (standard)">Bougie Love · St-Valentin (disponible)</option>
               <option value="Pré-demande Pâques">Pré-demande Pâques</option>
               <option value="Bougie personnalisée / sur mesure">Bougie personnalisée / sur mesure</option>
             </select>
           </div>
-          <div class="field" id="cf-size-wrap" hidden><label for="cf-size">Taille</label><select id="cf-size" name="Taille" disabled></select></div>
-          <div class="field"><label for="cf-address">Adresse de livraison *</label><input id="cf-address" name="Adresse de livraison" placeholder="Rue, NPA, ville — Suisse" required/></div>
+          <div class="row2" id="cf-size-wrap" hidden>
+            <div class="field"><label for="cf-size">Taille</label>
+              <select id="cf-size" name="Taille" disabled><option>Petite · 90 g · 8.90 CHF</option><option>Grande · 180 g · 10.90 CHF</option></select>
+            </div>
+            <div class="field"><label for="cf-qty">Quantité</label><input id="cf-qty" name="Quantité" type="number" min="1" value="1" disabled/></div>
+          </div>
+          <div class="field"><label for="cf-address">Adresse de livraison *</label><input id="cf-address" name="Adresse de livraison" autocomplete="street-address" placeholder="Rue, NPA, ville — Suisse" required/></div>
           <div class="field"><label for="cf-message">Message</label><textarea id="cf-message" name="Message" placeholder="Question, demande spéciale, message cadeau…"></textarea></div>
-          <button class="btn" type="submit">Envoyer ma demande</button>
+          <button class="btn btn-primary btn-block" type="submit">Envoyer ma demande</button>
         </form>
-        <div class="success" id="contact-success"><h4>Demande reçue !</h4><p>Merci ! On te répond sous 24 h pour confirmer. À très vite.</p></div>
+        <div class="success" id="contact-success" role="status"><div class="success-ic">✦</div><h4>Demande reçue !</h4><p>Merci ! On te répond sous 24 h pour confirmer. À très vite.</p></div>
       </div>
     </div>
   </section>
 </main>
 
-<!-- ═══ FOOTER ═══ -->
-<footer>
-  <div class="foot-cta">
-    <p class="rv">Suis l'atelier, les nouvelles collections et les coulisses sur Instagram.</p>
-    <a class="btn rv" href="https://www.instagram.com/yumiyacandle" target="_blank" rel="noopener">@yumiyacandle</a>
+<!-- ═══ COMPOSANT : PIED DE PAGE ═══ -->
+<footer class="footer" data-dark>
+  <div class="container">
+    <div class="foot-cta">
+      <h2 class="display-l">Allume <em>le moment.</em></h2>
+      <div class="foot-cta-btns">
+        <a class="btn btn-primary" href="#love">Commander la Love</a>
+        <a class="btn btn-ghost light" href="https://www.instagram.com/yumiyacandle" target="_blank" rel="noopener">@yumiyacandle</a>
+      </div>
+    </div>
+    <div class="foot-grid">
+      <div class="foot-brand">
+        <img src="assets/logo-light.png" alt="Yumiya Candle"/>
+        <p>Bougies gourmandes artisanales. Collections saisonnières et créations sur mesure, faites à la main en Suisse.</p>
+      </div>
+      <div>
+        <h4>Boutique</h4>
+        <ul><li><a href="#love">Bougie Love</a></li><li><a href="#collections">Collections</a></li><li><a href="#sur-mesure">Sur mesure</a></li><li><a href="#commander">Commander</a></li></ul>
+      </div>
+      <div>
+        <h4>Infos</h4>
+        <ul><li><a href="#bougie">La bougie</a></li><li><a href="#faq">FAQ</a></li><li><button type="button" data-open="notify">Alerte Pâques</button></li></ul>
+      </div>
+      <div>
+        <h4>Contact</h4>
+        <ul>
+          <li><a href="https://www.instagram.com/yumiyacandle" target="_blank" rel="noopener">Instagram · @yumiyacandle</a></li>
+          <li><a href="mailto:hello@yumiyacandle.ch">hello@yumiyacandle.ch</a></li>
+          <li><span>Suisse romande</span></li>
+        </ul>
+      </div>
+    </div>
+    <div class="foot-word" aria-hidden="true">Yumiya Candle</div>
+    <div class="foot-bottom"><span>© <span id="year"></span> Yumiya Candle · Tous droits réservés</span><span>Fait main avec amour en Suisse</span></div>
   </div>
-  <div class="foot-big display" aria-hidden="true">Yumiya Candle</div>
-  <div class="foot-grid">
-    <div>
-      <img src="assets/logo-light.png" alt="Yumiya Candle"/>
-      <p>Bougies gourmandes artisanales. Collections saisonnières et créations sur mesure, faites à la main en Suisse.</p>
-    </div>
-    <div>
-      <h4>Navigation</h4>
-      <ul><li><a href="#couches">La bougie</a></li><li><a href="#gamme">La gamme</a></li><li><a href="#sur-mesure">Sur mesure</a></li><li><a href="#commander">Commander</a></li></ul>
-    </div>
-    <div>
-      <h4>Contact</h4>
-      <ul>
-        <li><a href="https://www.instagram.com/yumiyacandle" target="_blank" rel="noopener">Instagram · @yumiyacandle</a></li>
-        <li><a href="mailto:hello@yumiyacandle.ch">hello@yumiyacandle.ch</a></li>
-        <li><a>Suisse romande</a></li>
-      </ul>
-    </div>
-  </div>
-  <div class="foot-bottom"><span>© <span id="year"></span> Yumiya Candle · Tous droits réservés</span><span>Fait main avec amour en Suisse</span></div>
 </footer>
 
 <!-- ═══ PANIER ═══ -->
 <div class="overlay" id="overlay"></div>
-<aside class="cart" id="cart" aria-label="Panier">
-  <div class="cart-hd"><h3>Mon panier</h3><button class="x-btn" data-close aria-label="Fermer"><svg viewBox="0 0 14 14" stroke="currentColor" stroke-width="1.6"><path d="M1 1l12 12M13 1L1 13"/></svg></button></div>
-  <div class="cart-body" id="cart-body"></div>
-  <div class="cart-ft" id="cart-ft">
+<aside class="drawer" id="cart" aria-label="Panier" aria-hidden="true">
+  <div class="drawer-hd"><h3>Mon panier</h3><button class="x-btn" data-close aria-label="Fermer"><svg viewBox="0 0 14 14" stroke="currentColor" stroke-width="1.6"><path d="M1 1l12 12M13 1L1 13"/></svg></button></div>
+  <div class="drawer-body" id="cart-body"></div>
+  <div class="drawer-ft" id="cart-ft">
     <div class="cart-total"><span>Total estimé</span><strong id="cart-total">0.00 CHF</strong></div>
-    <button class="btn" data-open="order">Envoyer ma demande</button>
+    <button class="btn btn-primary btn-block" data-open="order">Envoyer ma demande</button>
     <p>Aucun paiement en ligne · Confirmation sous 24 h<br/>Paiement Twint ou virement bancaire</p>
   </div>
 </aside>
 
 <!-- ═══ MODALE COMMANDE ═══ -->
-<div class="modal" id="modal-order" role="dialog" aria-modal="true" aria-labelledby="order-title">
-  <div class="form-box">
+<div class="modal" id="modal-order" role="dialog" aria-modal="true" aria-labelledby="order-title" aria-hidden="true">
+  <div class="card-form modal-card">
     <button class="x-btn" data-close aria-label="Fermer"><svg viewBox="0 0 14 14" stroke="currentColor" stroke-width="1.6"><path d="M1 1l12 12M13 1L1 13"/></svg></button>
     <form id="order-form" novalidate>
       <h3 id="order-title">Ta demande de commande</h3>
-      <p>Remplis tes coordonnées — on te confirme et on organise le paiement sous 24 h.</p>
+      <p>Tes coordonnées — on te confirme et on organise le paiement sous 24 h.</p>
       <input type="checkbox" name="botcheck" class="hp" tabindex="-1" autocomplete="off"/>
       <div class="summary" id="order-summary"></div>
-      <div class="field"><label for="om-name">Ton prénom *</label><input id="om-name" name="Nom" placeholder="Marie" required/></div>
+      <div class="field"><label for="om-name">Ton prénom *</label><input id="om-name" name="Nom" autocomplete="given-name" placeholder="Marie" required/></div>
       <div class="row2">
-        <div class="field"><label for="om-email">Email *</label><input id="om-email" name="Email client" type="email" placeholder="marie@email.com" required/></div>
-        <div class="field"><label for="om-phone">Téléphone</label><input id="om-phone" name="Telephone" placeholder="+41 78 000 00 00"/></div>
+        <div class="field"><label for="om-email">Email *</label><input id="om-email" name="Email client" type="email" autocomplete="email" placeholder="marie@email.com" required/></div>
+        <div class="field"><label for="om-phone">Téléphone</label><input id="om-phone" name="Telephone" autocomplete="tel" placeholder="+41 78 000 00 00"/></div>
       </div>
-      <div class="field"><label for="om-address">Adresse de livraison *</label><input id="om-address" name="Adresse" placeholder="Rue, NPA, ville — Suisse" required/></div>
-      <div class="field"><label for="om-msg">Message</label><textarea id="om-msg" name="Message" placeholder="Demande spéciale ?" style="min-height:70px"></textarea></div>
-      <button class="btn" type="submit">Confirmer ma demande</button>
+      <div class="field"><label for="om-address">Adresse de livraison *</label><input id="om-address" name="Adresse" autocomplete="street-address" placeholder="Rue, NPA, ville — Suisse" required/></div>
+      <div class="field"><label for="om-msg">Message</label><textarea id="om-msg" name="Message" placeholder="Demande spéciale, message cadeau ?" style="min-height:72px"></textarea></div>
+      <button class="btn btn-primary btn-block" type="submit">Confirmer ma demande</button>
     </form>
-    <div class="success" id="order-success"><h4>Merci !</h4><p>Ta demande a bien été reçue. On te contacte sous 24 h. À très vite.</p></div>
+    <div class="success" id="order-success" role="status"><div class="success-ic">✦</div><h4>Merci !</h4><p>Ta demande a bien été reçue. On te contacte sous 24 h. À très vite.</p></div>
   </div>
 </div>
 
 <!-- ═══ MODALE PÂQUES ═══ -->
-<div class="modal" id="modal-notify" role="dialog" aria-modal="true" aria-labelledby="notify-title">
-  <div class="form-box" style="max-width:440px">
+<div class="modal" id="modal-notify" role="dialog" aria-modal="true" aria-labelledby="notify-title" aria-hidden="true">
+  <div class="card-form modal-card narrow">
     <button class="x-btn" data-close aria-label="Fermer"><svg viewBox="0 0 14 14" stroke="currentColor" stroke-width="1.6"><path d="M1 1l12 12M13 1L1 13"/></svg></button>
     <form id="notify-form" novalidate>
+      <img class="tint-spring modal-candle" src="assets/candle-cutout.webp" alt=""/>
       <h3 id="notify-title">Collection Pâques</h3>
       <p>Fleurs de printemps, miel et vanille douce. Laisse ton email, on te prévient dès qu'elle est disponible.</p>
       <input type="checkbox" name="botcheck" class="hp" tabindex="-1" autocomplete="off"/>
-      <div class="field"><label for="nm-email">Ton email *</label><input id="nm-email" name="Email client" type="email" placeholder="marie@email.com" required/></div>
-      <button class="btn" type="submit">M'alerter</button>
+      <div class="field"><label for="nm-email">Ton email *</label><input id="nm-email" name="Email client" type="email" autocomplete="email" placeholder="marie@email.com" required/></div>
+      <button class="btn btn-primary btn-block" type="submit">M'alerter</button>
     </form>
-    <div class="success" id="notify-success"><h4>C'est noté !</h4><p>On te prévient dès que Pâques est disponible.</p></div>
+    <div class="success" id="notify-success" role="status"><div class="success-ic">✦</div><h4>C'est noté !</h4><p>On te prévient dès que la collection Pâques est disponible.</p></div>
   </div>
 </div>
 
-<div class="toast" id="toast" role="status"></div>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
 
+<script src="assets/vendor/motion.js"></script>
 <script src="assets/main.js"></script>
 </body>
 </html>
